@@ -1,0 +1,1687 @@
+/* ==========================================================================
+   LA BODA DE LUIS & VANE — LANDING PAGE VSL MOBILE-FIRST
+   Fine-Art Bridal Stationery & Blind Embossing System
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES DE COLOR Y SISTEMA DE DISEÑO
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta Física de Papelería de Lujo */
+  --bg-linen: #DDD6CA;
+  --bg-linen-dark: #CFC7B9;
+  --card-ivory: #F3EFE6;
+  --card-ivory-light: #FAF8F3;
+  --card-ivory-warm: #EFE9DD;
+  --ink-charcoal: #3B3734;
+  --ink-muted: #635D57;
+  --ink-faint: #8A837B;
+  
+  /* Sistema de Relieve Seco (Blind Embossing) */
+  --emboss-light: #FAF8F3;
+  --emboss-shadow: #D5CEC2;
+  --emboss-deep: rgba(165, 155, 140, 0.55);
+  
+  /* Acentos Botánicos Sutiles */
+  --accent-sage: #68785A;
+  --accent-sage-dark: #536247;
+  --accent-sage-soft: rgba(104, 120, 90, 0.12);
+  --accent-blush: #F5E6DF;
+
+  /* Tipografías */
+  --font-script: 'Great Vibes', 'Pinyon Script', cursive;
+  --font-serif: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+
+  /* Ergonomía Táctil Móvil */
+  --touch-target-min: 48px;
+
+  /* Sombras y Transiciones */
+  --shadow-card: 0 16px 36px rgba(59, 55, 52, 0.08), 0 2px 6px rgba(59, 55, 52, 0.04);
+  --shadow-subtle: 0 8px 24px rgba(59, 55, 52, 0.06);
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET Y BASES MOBILE-FIRST
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--card-ivory);
+}
+
+body.vsl-landing {
+  font-family: var(--font-serif);
+  color: var(--ink-charcoal);
+  background-color: var(--card-ivory);
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Textura sutil de micro-grano SVG */
+.paper-grain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.svg-definitions {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Contenedor VSL de ancho completo con ancho máximo de lectura */
+.vsl-container {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .vsl-container {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vsl-container {
+    padding: 0 48px;
+    max-width: 900px;
+  }
+}
+
+/* Secciones de Ancho Completo 100% */
+.vsl-section {
+  position: relative;
+  width: 100%;
+  padding: 56px 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .vsl-section {
+    padding: 80px 0;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Separador Fino Editorial */
+.fine-divider {
+  width: 48px;
+  height: 1px;
+  background-color: var(--ink-charcoal);
+  margin: 12px auto;
+  opacity: 0.35;
+}
+
+/* Encabezados de Sección */
+.section-title-wrapper {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.section-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+  margin-bottom: 6px;
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 2.2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. RELIEVE SECO Y ESQUINAS BOTÁNICAS (BLIND EMBOSSING)
+   -------------------------------------------------------------------------- */
+.embossed-corner {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 3;
+  color: var(--card-ivory);
+}
+
+@media (min-width: 768px) {
+  .embossed-corner {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.botanical-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(-1.5px -1.5px 1.5px #FFFFFF) 
+          drop-shadow(2px 2px 2.5px var(--emboss-deep));
+  opacity: 0.95;
+}
+
+.corner-top-left {
+  top: 14px;
+  left: 14px;
+}
+
+.corner-top-right {
+  top: 14px;
+  right: 14px;
+  transform: scaleX(-1);
+}
+
+.corner-bottom-left {
+  bottom: 14px;
+  left: 14px;
+  transform: scaleY(-1);
+}
+
+.corner-bottom-right {
+  bottom: 14px;
+  right: 14px;
+  transform: scale(-1, -1);
+}
+
+.corner-mini {
+  width: 52px;
+  height: 52px;
+  top: 10px;
+  right: 10px;
+}
+
+/* Tarjeta de Papel Algodón Reutilizable */
+.cotton-card {
+  position: relative;
+  background-color: var(--card-ivory);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.card-inner-emboss {
+  position: relative;
+  z-index: 2;
+  padding: 28px 20px;
+  border: 1px solid var(--emboss-shadow);
+  border-radius: 4px;
+  margin: 8px;
+  box-shadow: 
+    inset 1px 1px 1px var(--emboss-light),
+    inset -1px -1px 1px rgba(213, 206, 194, 0.7);
+}
+
+@media (min-width: 768px) {
+  .card-inner-emboss {
+    padding: 38px 32px;
+    margin: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. SECCIÓN 1: HERO VSL & ESCENARIO PROTAGONISTA (Fondo Marfil #F3EFE6)
+   -------------------------------------------------------------------------- */
+.section-hero {
+  background-color: var(--card-ivory);
+  padding-top: 48px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(59, 55, 52, 0.08);
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-pretitle {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.hero-couple-title {
+  font-family: var(--font-script);
+  font-size: clamp(3.4rem, 10vw, 6.2rem);
+  font-weight: 400;
+  color: var(--ink-charcoal);
+  line-height: 1.1;
+  margin: 10px 0 24px 0;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.hero-ampersand {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.65em;
+  color: var(--ink-muted);
+  margin: 0 6px;
+}
+
+/* Marco Editorial en Bajo Relieve */
+.hero-photo-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 28px auto;
+}
+
+.passepartout-editorial-frame {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--card-ivory-light);
+  border-radius: 6px;
+  box-shadow: 
+    inset 2.5px 2.5px 6px rgba(59, 55, 52, 0.18),
+    inset -2.5px -2.5px 6px #FAF8F3,
+    0 14px 32px rgba(59, 55, 52, 0.1);
+  border: 1px solid rgba(213, 206, 194, 0.6);
+  transition: transform 0.4s ease;
+}
+
+.editorial-bevel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid rgba(59, 55, 52, 0.18);
+  background-color: #E7E0D3;
+}
+
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: sepia(0.05) contrast(1.02);
+  transition: transform 0.6s ease;
+}
+
+.passepartout-editorial-frame:hover .editorial-img {
+  transform: scale(1.03);
+}
+
+/* Monograma Fallback */
+.monogram-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #F8F5EE 0%, #E7E0D3 100%);
+}
+
+.monogram-emboss {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--card-ivory);
+  filter: drop-shadow(-1.5px -1.5px 2px #FFFFFF) drop-shadow(2px 2px 3px rgba(165, 155, 140, 0.6));
+}
+
+.monogram-letter {
+  font-family: var(--font-script);
+  font-size: 5.5rem;
+  line-height: 1;
+}
+
+.monogram-amp {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-style: italic;
+}
+
+.monogram-date {
+  font-family: var(--font-serif);
+  letter-spacing: 0.25em;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin-top: 10px;
+}
+
+/* Fecha Insignia en Formato Postal */
+.insignia-date-wrapper {
+  margin: 0 auto 30px auto;
+  max-width: 440px;
+  width: 100%;
+}
+
+.date-triptych {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-top: 1px solid rgba(59, 55, 52, 0.45);
+  border-bottom: 1px solid rgba(59, 55, 52, 0.45);
+  padding: 10px 14px;
+}
+
+@media (min-width: 768px) {
+  .date-triptych {
+    gap: 28px;
+    padding: 14px 20px;
+  }
+}
+
+.triptych-month,
+.triptych-year {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .triptych-month,
+  .triptych-year {
+    font-size: 1.35rem;
+  }
+}
+
+.triptych-separator {
+  width: 1px;
+  height: 42px;
+  background-color: var(--ink-charcoal);
+  opacity: 0.85;
+}
+
+.triptych-day {
+  font-size: 2.8rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-charcoal);
+  padding: 0 8px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+@media (min-width: 768px) {
+  .triptych-day {
+    font-size: 3.6rem;
+    padding: 0 12px;
+  }
+}
+
+.hero-location-sub {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 10px;
+}
+
+/* Contador Regresivo en Tiempo Real */
+.countdown-section {
+  width: 100%;
+  max-width: 420px;
+  margin: 8px auto 32px auto;
+}
+
+.countdown-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+  margin-bottom: 12px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (min-width: 480px) {
+  .countdown-grid {
+    gap: 12px;
+  }
+}
+
+.countdown-card {
+  background-color: var(--card-ivory-light);
+  border: 1px solid var(--emboss-shadow);
+  border-radius: 4px;
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    -2px -2px 4px #FFFFFF,
+    2px 2px 5px rgba(180, 170, 155, 0.4),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.countdown-number {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--ink-charcoal);
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .countdown-number {
+    font-size: 2rem;
+  }
+}
+
+.countdown-unit {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+/* Botón CTA del Hero */
+.hero-cta-wrapper {
+  width: 100%;
+  max-width: 340px;
+}
+
+.btn-hero-cta {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 16px 28px;
+  font-size: 0.88rem;
+}
+
+.btn-arrow-down {
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.btn-hero-cta:hover .btn-arrow-down {
+  transform: translateY(3px);
+}
+
+/* --------------------------------------------------------------------------
+   5. SECCIÓN 2: LAS DOS FECHAS DE NUESTRA BODA (Fondo Lino #DDD6CA)
+   -------------------------------------------------------------------------- */
+.section-dates {
+  background-color: var(--bg-linen);
+  background-image: radial-gradient(circle at 50% 30%, var(--bg-linen) 0%, var(--bg-linen-dark) 100%);
+  border-bottom: 1px solid rgba(59, 55, 52, 0.1);
+}
+
+.dates-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .dates-cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+.date-card {
+  text-align: center;
+}
+
+.badge-ceremonial {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 4px 12px;
+  border: 1px solid rgba(59, 55, 52, 0.2);
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.badge-highlight {
+  color: var(--accent-sage-dark);
+  background-color: var(--accent-sage-soft);
+  border-color: var(--accent-sage);
+}
+
+.event-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+  margin-bottom: 14px;
+}
+
+.event-date-triptych {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: var(--ink-charcoal);
+}
+
+.event-date-triptych .sep {
+  opacity: 0.4;
+}
+
+.highlight-day {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-charcoal);
+  padding: 0 4px;
+}
+
+.event-date-main .highlight-day {
+  font-size: 2.2rem;
+  color: var(--accent-sage-dark);
+}
+
+.event-desc {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.event-schedule-note {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--ink-charcoal);
+}
+
+.event-place-box {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(59, 55, 52, 0.25);
+}
+
+.event-time {
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+}
+
+.event-location {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   6. SECCIÓN 3: UBICACIÓN, DRESSCODE Y DESCARGA PDF (Fondo Marfil #F3EFE6)
+   -------------------------------------------------------------------------- */
+.section-details {
+  background-color: var(--card-ivory);
+  border-bottom: 1px solid rgba(59, 55, 52, 0.08);
+}
+
+.details-triplet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .details-triplet-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+.info-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-card .card-inner-emboss {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.info-card-icon {
+  color: var(--accent-sage);
+  margin-bottom: 12px;
+}
+
+.info-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+}
+
+.info-card-subtitle {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 4px 0 12px 0;
+}
+
+.info-card-text {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.card-btn-wrapper {
+  margin-top: auto;
+}
+
+/* Bolitas de Paleta de Colores Sugerida */
+.palette-wrapper {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dotted rgba(59, 55, 52, 0.25);
+}
+
+.palette-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+}
+
+.palette-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.palette-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.palette-dot:hover {
+  transform: scale(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   7. SECCIÓN 4: APARTADO DE COLABORACIÓN / PRESENTE (Fondo Lino #DDD6CA)
+   -------------------------------------------------------------------------- */
+.section-colaboracion {
+  background-color: var(--bg-linen);
+  background-image: radial-gradient(circle at 50% 20%, var(--bg-linen) 0%, var(--bg-linen-dark) 100%);
+  border-bottom: 1px solid rgba(59, 55, 52, 0.1);
+}
+
+.colaboracion-card {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.seal-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.seal-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--ink-charcoal);
+  filter: drop-shadow(0 3px 6px rgba(59, 55, 52, 0.12));
+}
+
+.colaboracion-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+}
+
+@media (min-width: 768px) {
+  .colaboracion-title {
+    font-size: 1.7rem;
+  }
+}
+
+.colaboracion-message {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--ink-charcoal);
+  max-width: 540px;
+  margin: 0 auto 20px auto;
+}
+
+.colaboracion-extra-module {
+  margin-top: 18px;
+}
+
+.btn-toggle-colaboracion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-target-min);
+  background-color: var(--card-ivory-light);
+  color: var(--ink-charcoal);
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: 1px solid var(--emboss-shadow);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-toggle-colaboracion:hover {
+  background-color: #FFFFFF;
+}
+
+.toggle-chevron {
+  transition: transform 0.3s ease;
+}
+
+.btn-toggle-colaboracion[aria-expanded="true"] .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+.colaboracion-details-content {
+  margin-top: 18px;
+  animation: slideFadeDown 0.3s ease-out;
+}
+
+.colaboracion-info-box {
+  background-color: #FAF8F3;
+  border: 1px solid var(--emboss-shadow);
+  border-radius: 4px;
+  padding: 18px;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--ink-charcoal);
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto 16px auto;
+}
+
+.btn-copy-data {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-target-min);
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-copy-data:hover {
+  background-color: var(--accent-sage-dark);
+}
+
+/* --------------------------------------------------------------------------
+   8. SECCIÓN 5: FORMULARIO DE CONFIRMACIÓN SECRETA (RSVP INTEGRADO)
+   -------------------------------------------------------------------------- */
+.section-rsvp {
+  background-color: var(--card-ivory);
+  border-bottom: 1px solid rgba(59, 55, 52, 0.08);
+}
+
+.rsvp-main-card {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.rsvp-header {
+  margin-bottom: 24px;
+}
+
+.rsvp-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+}
+
+.rsvp-title {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--ink-charcoal);
+  margin: 4px 0;
+}
+
+.rsvp-deadline-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8C3B32;
+  background-color: rgba(178, 64, 54, 0.08);
+  border: 1px solid rgba(178, 64, 54, 0.3);
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.rsvp-intro-text {
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  max-width: 480px;
+  margin: 12px auto 0 auto;
+  line-height: 1.6;
+}
+
+/* Formulario */
+.form-fieldset {
+  border: 1px solid rgba(59, 55, 52, 0.18);
+  border-radius: 4px;
+  padding: 20px 16px 22px 16px;
+  margin-bottom: 24px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (min-width: 768px) {
+  .form-fieldset {
+    padding: 24px 22px 26px 22px;
+  }
+}
+
+.fieldset-legend {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+  padding: 0 10px;
+}
+
+.fieldset-header-action {
+  margin-bottom: 14px;
+}
+
+.fieldset-help {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #B24036;
+}
+
+/* REGLA CRÍTICA: font-size 16px (1rem) en móviles para evitar auto-zoom */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: 16px; /* Prevención rigurosa de auto-zoom en iOS Safari y Android Chrome */
+  color: var(--ink-charcoal);
+  background-color: #FFFFFF;
+  border: 1px solid #D5CEC2;
+  border-radius: 4px;
+  padding: 12px 14px;
+  min-height: var(--touch-target-min);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--accent-sage);
+  box-shadow: 0 0 0 3px rgba(104, 120, 90, 0.18);
+}
+
+.form-input.is-invalid {
+  border-color: #B24036;
+  background-color: #FFFDFD;
+}
+
+.field-error {
+  display: block;
+  font-size: 0.75rem;
+  color: #B24036;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.sub-input {
+  margin-top: 10px;
+}
+
+/* Radio Cards para Asistencia Principal */
+.radio-card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  padding: 12px 16px;
+  background-color: #FAF8F3;
+  border: 1px solid #D5CEC2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+}
+
+.radio-card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.radio-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.8px solid var(--ink-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition-smooth);
+}
+
+.radio-indicator::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-sage);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: var(--transition-smooth);
+}
+
+.radio-card input:checked ~ .radio-card-content .radio-indicator {
+  border-color: var(--accent-sage);
+}
+
+.radio-card input:checked ~ .radio-card-content .radio-indicator::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.radio-card:has(input:checked) {
+  border-color: var(--accent-sage);
+  background-color: rgba(104, 120, 90, 0.08);
+}
+
+.radio-text {
+  font-size: 0.9rem;
+  color: var(--ink-charcoal);
+  font-weight: 500;
+}
+
+/* Radio Pill Group (Civil) */
+.radio-pill-group {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: var(--touch-target-min);
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  border: 1px solid #D5CEC2;
+  border-radius: 4px;
+  background-color: #FAF8F3;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.radio-pill input {
+  display: none;
+}
+
+.radio-pill:has(input:checked) {
+  border-color: var(--accent-sage);
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* Acompañantes Dinámicos */
+.companions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.companion-card {
+  background-color: #FAF8F3;
+  border: 1px solid #D5CEC2;
+  border-radius: 4px;
+  padding: 16px 14px;
+  animation: slideFadeDown 0.3s ease-out;
+}
+
+@keyframes slideFadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.companion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(59, 55, 52, 0.1);
+}
+
+.companion-number {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+}
+
+.btn-remove-companion {
+  background: none;
+  border: none;
+  color: #B24036;
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 10px;
+  min-height: 36px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-remove-companion:hover {
+  background-color: rgba(178, 64, 54, 0.1);
+}
+
+.btn-add-companion {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #FAF8F3;
+  color: var(--ink-charcoal);
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px;
+  border: 1.5px dashed var(--accent-sage);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-add-companion:hover {
+  background-color: rgba(104, 120, 90, 0.1);
+  color: var(--accent-sage-dark);
+}
+
+.add-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* Acciones de Envío */
+.form-actions {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.privacy-note {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btn-submit {
+  width: 100%;
+  max-width: 360px;
+  min-height: var(--touch-target-min);
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(59, 55, 52, 0.2);
+  border-top-color: var(--ink-charcoal);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Vista de Éxito Integrada */
+.success-card {
+  text-align: center;
+  padding: 30px 16px;
+}
+
+.success-monogram-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px auto;
+  box-shadow: 0 8px 18px rgba(104, 120, 90, 0.35);
+}
+
+.check-symbol {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.success-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: var(--ink-charcoal);
+}
+
+.success-lead {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 8px auto 20px auto;
+  max-width: 440px;
+}
+
+.success-summary-box {
+  background-color: #FAF8F3;
+  border: 1px solid #D5CEC2;
+  border-radius: 4px;
+  padding: 18px;
+  text-align: left;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.success-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin-bottom: 24px;
+  padding: 0 16px;
+}
+
+.local-status-banner {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  background-color: var(--accent-sage-soft);
+  border: 1px solid var(--accent-sage);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 14px;
+}
+
+.status-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.status-content {
+  flex: 1;
+}
+
+.status-heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent-sage-dark);
+}
+
+.status-sub {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.btn-text-link {
+  background: none;
+  border: none;
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-sage-dark);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   9. SECCIÓN 6: FOOTER MINIMALISTA (Fondo Lino #DDD6CA)
+   -------------------------------------------------------------------------- */
+.vsl-footer {
+  background-color: var(--bg-linen);
+  padding: 44px 0 68px 0;
+  border-top: 1px solid rgba(59, 55, 52, 0.12);
+}
+
+.footer-names {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  color: var(--ink-charcoal);
+  margin-bottom: 6px;
+}
+
+.footer-details {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+.footer-copyright {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------------------
+   10. BOTONES Y ESTILOS TÁCTILES REPUJADOS
+   -------------------------------------------------------------------------- */
+.btn-embossed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-target-min);
+  background-color: var(--card-ivory);
+  color: var(--ink-charcoal);
+  font-family: var(--font-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: 1px solid var(--emboss-shadow);
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  box-shadow: 
+    -2.5px -2.5px 6px #FFFFFF,
+    3px 3px 7px rgba(175, 165, 150, 0.6),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.9);
+  transition: var(--transition-smooth);
+}
+
+.btn-embossed:hover {
+  background-color: #FAF7F0;
+  transform: translateY(-1.5px);
+  box-shadow: 
+    -3px -3px 8px #FFFFFF,
+    4px 4px 10px rgba(175, 165, 150, 0.7),
+    inset 1px 1px 1.5px rgba(255, 255, 255, 1);
+  color: #1F1C1A;
+}
+
+.btn-embossed:active {
+  transform: translateY(1px);
+  box-shadow: 
+    inset 2px 2px 5px rgba(59, 55, 52, 0.18),
+    inset -2px -2px 5px #FFFFFF;
+}
+
+.btn-subtle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-target-min);
+  background-color: #EDE7DC;
+  color: var(--ink-charcoal);
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(213, 206, 194, 0.9);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.btn-subtle:hover {
+  background-color: #E2DBD0;
+  border-color: var(--ink-muted);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   11. BARRA FLOTANTE INFERIOR EN MÓVIL (STICKY MOBILE CTA)
+   -------------------------------------------------------------------------- */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 12px 16px;
+  background: rgba(243, 239, 230, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(213, 206, 194, 0.8);
+  box-shadow: 0 -4px 16px rgba(59, 55, 52, 0.12);
+  display: flex;
+  justify-content: center;
+  transform: translateY(0);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.sticky-mobile-cta.is-hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-sticky-cta {
+  width: 100%;
+  max-width: 480px;
+  min-height: var(--touch-target-min);
+  padding: 13px 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  background-color: var(--card-ivory-light);
+  border-color: var(--accent-sage);
+}
+
+@media (min-width: 769px) {
+  /* En escritorio no se necesita la barra fija para dar un look limpio */
+  .sticky-mobile-cta {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. SISTEMA DE TOAST NOTIFICATIONS
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 74px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+@media (min-width: 769px) {
+  .toast-container {
+    bottom: 24px;
+  }
+}
+
+.toast {
+  background-color: var(--ink-charcoal);
+  color: #FFFFFF;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  padding: 14px 20px;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+  animation: toastIn 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+}
+
+.toast.toast-success {
+  background-color: #3C4A34;
+  border-left: 4px solid var(--accent-sage);
+}
+
+.toast.toast-error {
+  background-color: #5C2320;
+  border-left: 4px solid #E06359;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   13. CONTENEDOR DE LA POSTAL CLÁSICA PARA PDF (#printable-postcard)
+   -------------------------------------------------------------------------- */
+.printable-postcard {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 700px;
+  background-color: #DDD6CA;
+  padding: 30px;
+}
+
+.postcard-canvas {
+  position: relative;
+  background-color: #F3EFE6;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(59, 55, 52, 0.15);
+  padding: 40px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+.postcard-canvas .card-inner-frame {
+  border: 1px solid #D5CEC2;
+  padding: 30px 20px;
+}
+
+.postcard-canvas .couple-names {
+  font-family: var(--font-script);
+  font-size: 4.5rem;
+  margin: 10px 0;
+}
+
+.postcard-canvas .passepartout-frame {
+  max-width: 260px;
+  margin: 10px auto;
+  padding: 8px;
+  background-color: #FAF8F3;
+  box-shadow: inset 2px 2px 5px rgba(59, 55, 52, 0.2);
+}
+
+.postcard-canvas .passepartout-bevel {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.postcard-canvas .couple-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos de Impresión Nativa (@media print) */
+@media print {
+  body.vsl-landing > *:not(#printable-postcard) {
+    display: none !important;
+  }
+
+  .sticky-mobile-cta,
+  .toast-container {
+    display: none !important;
+  }
+
+  .printable-postcard {
+    position: static !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+
+  .postcard-canvas {
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
