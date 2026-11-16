@@ -195,7 +195,7 @@ body.vsl-landing {
 }
 
 /* --------------------------------------------------------------------------
-   3. BARRA SUPERIOR FIJA (STICKY NAVBAR FIJA 100% EN UNA SOLA LÍNEA)
+   3. BARRA SUPERIOR FIJA (STICKY NAVBAR Y MENÚ RESPONSIVO)
    -------------------------------------------------------------------------- */
 .sticky-navbar {
   position: fixed;
@@ -216,13 +216,14 @@ body.vsl-landing {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 16px;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 0 24px;
   height: 74px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .navbar-brand {
@@ -233,22 +234,86 @@ body.vsl-landing {
   align-items: center;
   line-height: 1;
   font-size: clamp(1.5rem, 2.2vw, 2rem);
-  margin-right: 24px;
   color: var(--ink-charcoal);
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
+.navbar-brand:hover {
+  opacity: 0.85;
+}
+
+/* Botón Hamburguesa / Menú en Móviles */
+.navbar-menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(250, 248, 243, 0.95);
+  border: 1.5px solid rgba(180, 160, 130, 0.6);
+  border-radius: 20px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(36, 32, 28, 0.06);
+}
+
+.navbar-menu-toggle:hover {
+  background-color: #FAF8F3;
+  border-color: var(--ink-charcoal);
+  transform: translateY(-1px);
+}
+
+.menu-toggle-label {
+  font-family: var(--font-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-charcoal);
+}
+
+.menu-toggle-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 16px;
+  height: 12px;
+  position: relative;
+}
+
+.menu-toggle-bars .bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--ink-charcoal);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animación a '✕' cuando el menú está abierto */
+.navbar-menu-toggle.is-active {
+  background-color: #EFEBE1;
+  border-color: var(--ink-charcoal);
+}
+
+.navbar-menu-toggle.is-active .bar-top {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.navbar-menu-toggle.is-active .bar-mid {
+  opacity: 0;
+  transform: translateX(6px);
+}
+
+.navbar-menu-toggle.is-active .bar-bot {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* Enlaces de Navegación */
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 14px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.navbar-links::-webkit-scrollbar {
-  display: none;
+  gap: 12px;
 }
 
 .nav-link {
@@ -260,23 +325,135 @@ body.vsl-landing {
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: color 0.2s ease;
-  padding: 4px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 4px 6px;
 }
 
 .nav-link:hover {
   color: var(--ink-charcoal);
 }
 
-.nav-link-rsvp {
-  color: var(--accent-sage-dark);
-}
-
 .nav-sep {
-  color: rgba(36, 32, 28, 0.35);
+  color: rgba(180, 160, 130, 0.55);
   font-size: 0.85rem;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+/* Botón Destacado Elegante para CONFIRMAR */
+.btn-nav-confirmar {
+  background-color: var(--ink-charcoal);
+  color: var(--card-ivory-light) !important;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(180, 160, 130, 0.7);
+  box-shadow: 0 3px 10px rgba(36, 32, 28, 0.15);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  transition: all 0.25s ease;
+}
+
+.btn-nav-confirmar:hover {
+  background-color: #38322C;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(36, 32, 28, 0.22);
+}
+
+/* Versión de Teléfono (Móvil / Pantallas < 860px) */
+@media (max-width: 860px) {
+  .navbar-container {
+    padding: 0 18px;
+  }
+
+  .navbar-menu-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(246, 243, 236, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 2px solid rgba(180, 160, 130, 0.45);
+    box-shadow: 0 14px 30px rgba(36, 32, 28, 0.18);
+    padding: 16px 20px 22px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.35s ease;
+  }
+
+  .navbar-links.is-open {
+    max-height: 520px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-sep {
+    display: none;
+  }
+
+  .nav-link {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-charcoal);
+    border-bottom: 1px solid rgba(213, 206, 194, 0.45);
+    border-radius: 4px;
+  }
+
+  .nav-link:hover,
+  .nav-link:active {
+    background-color: rgba(239, 235, 225, 0.6);
+  }
+
+  /* CONFIRMAR RESALTA ELEGANTEMENTE EN EL MENÚ MÓVIL */
+  .btn-nav-confirmar {
+    margin-top: 8px;
+    width: 100%;
+    max-width: 320px;
+    padding: 13px 20px;
+    background-color: var(--ink-charcoal);
+    color: var(--card-ivory-light) !important;
+    border: 1.5px solid #B4A082;
+    border-radius: 28px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    box-shadow: 
+      0 6px 18px rgba(36, 32, 28, 0.25),
+      0 0 12px rgba(180, 160, 130, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1.5px solid #B4A082;
+  }
+
+  .btn-nav-confirmar:hover,
+  .btn-nav-confirmar:active {
+    background-color: #38322C;
+    color: #FFFFFF !important;
+    box-shadow: 
+      0 8px 22px rgba(36, 32, 28, 0.35),
+      0 0 14px rgba(180, 160, 130, 0.5);
+    transform: translateY(-1px);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1987,12 +2164,8 @@ body.vsl-landing {
 .btn-sticky-cta {
   pointer-events: auto; /* El botón sí es cliqueable */
   width: 100%;
-  min-height: var(--touch-target-min);
-  padding: 14px 24px;
-  font-size: 0.88rem;
-  letter-spacing: 0.14em;
-  font-weight: 700;
-  text-transform: uppercase;
+  min-height: 52px;
+  padding: 10px 20px;
   background-color: var(--ink-charcoal);
   color: var(--card-ivory-light);
   border: 1.5px solid #D5CEC2;
@@ -2006,11 +2179,41 @@ body.vsl-landing {
   transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
+.sticky-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.sticky-cta-title {
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--card-ivory-light);
+  line-height: 1.25;
+}
+
+.sticky-cta-action {
+  font-size: 0.80rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #D5CEC2;
+  line-height: 1.2;
+}
+
 .btn-sticky-cta:hover {
   background-color: #38322C;
   color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+}
+
+.btn-sticky-cta:hover .sticky-cta-action {
+  color: #FFFFFF;
 }
 
 .btn-sticky-cta:active {

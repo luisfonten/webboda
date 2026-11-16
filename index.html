@@ -56,7 +56,26 @@
   <nav class="sticky-navbar" id="sticky-navbar" aria-label="Navegación principal">
     <div class="navbar-container">
       <a href="#inicio" class="navbar-brand">Vane & Luis</a>
-      <div class="navbar-links">
+
+      <!-- Botón de Menú para Versión Móvil -->
+      <button 
+        type="button" 
+        class="navbar-menu-toggle" 
+        id="navbar-menu-toggle" 
+        aria-label="Abrir menú de navegación" 
+        aria-expanded="false"
+        aria-controls="navbar-menu-dropdown"
+      >
+        <span class="menu-toggle-label">Menú</span>
+        <span class="menu-toggle-bars" aria-hidden="true">
+          <span class="bar bar-top"></span>
+          <span class="bar bar-mid"></span>
+          <span class="bar bar-bot"></span>
+        </span>
+      </button>
+
+      <!-- Enlaces de Navegación (Horizontal en Desktop, Menú Desplegable en Móvil) -->
+      <div class="navbar-links" id="navbar-menu-dropdown">
         <a href="#inicio" class="nav-link">Inicio</a>
         <span class="nav-sep" aria-hidden="true">|</span>
         <a href="#lugar-hora" class="nav-link">Lugar y Hora</a>
@@ -65,7 +84,11 @@
         <span class="nav-sep" aria-hidden="true">|</span>
         <a href="#vestimenta" class="nav-link">Vestimenta</a>
         <span class="nav-sep" aria-hidden="true">|</span>
-        <a href="#confirmar" class="nav-link nav-link-rsvp">Confirmar Asistencia</a>
+        <a href="#presentes" class="nav-link">Presentes</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="#confirmar" class="nav-link nav-link-rsvp btn-nav-confirmar">
+          <span>CONFIRMAR ASISTENCIA</span>
+        </a>
       </div>
     </div>
   </nav>
@@ -951,8 +974,11 @@
        BOTÓN FLOTANTE PERMANENTE (CTA FLOTANTE) — Centrado abajo, se oculta en #confirmar
        ========================================================================= -->
   <div class="sticky-mobile-cta" id="sticky-mobile-cta">
-    <a href="#confirmar" class="btn-embossed btn-sticky-cta" id="sticky-cta-btn">
-      <span>CONFIRMAR ASISTENCIA (ANTES DEL 22 NOV)</span>
+    <a href="#confirmar" class="btn-embossed btn-sticky-cta" id="sticky-cta-btn" aria-label="Confirmar asistencia antes del 22 de noviembre - Confirmar - Click Aquí">
+      <span class="sticky-cta-inner">
+        <span class="sticky-cta-title">CONFIRMAR ASISTENCIA (ANTES DEL 22 NOV)</span>
+        <span class="sticky-cta-action">Confirmar - Click Aquí</span>
+      </span>
     </a>
   </div>
 

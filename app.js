@@ -98,6 +98,9 @@ function initializePage() {
   // Configurar Sticky Mobile CTA sin franja de fondo y con auto-ocultación precisa
   setupStickyMobileCta();
 
+  // Configurar Menú Desplegable Responsivo para Móviles
+  setupMobileMenu();
+
   // Configurar eventos de presentes y copiado
   setupPresentsEvents();
 
@@ -276,6 +279,72 @@ function setupStickyMobileCta() {
     // Si el usuario está cerca del final de la página, ocultar
     if (scrollPos >= documentHeight - 140) {
       hideSticky();
+    }
+  }, { passive: true });
+}
+
+
+/**
+ * Menú desplegable táctil para teléfonos en la cabecera fija
+ */
+function setupMobileMenu() {
+  const toggleBtn = document.getElementById("navbar-menu-toggle");
+  const dropdown = document.getElementById("navbar-menu-dropdown");
+  if (!toggleBtn || !dropdown) return;
+
+  const navLinks = dropdown.querySelectorAll(".nav-link");
+
+  function openMenu() {
+    dropdown.classList.add("is-open");
+    toggleBtn.classList.add("is-active");
+    toggleBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu() {
+    dropdown.classList.remove("is-open");
+    toggleBtn.classList.remove("is-active");
+    toggleBtn.setAttribute("aria-expanded", "false");
+  }
+
+  function toggleMenu(e) {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.contains("is-open");
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  toggleBtn.addEventListener("click", toggleMenu);
+
+  // Cerrar el menú automáticamente al hacer clic en cualquiera de las opciones
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeMenu();
+    });
+  });
+
+  // Cerrar al hacer clic fuera del navbar
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+      if (dropdown.classList.contains("is-open")) {
+        closeMenu();
+      }
+    }
+  });
+
+  // Cerrar con la tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && dropdown.classList.contains("is-open")) {
+      closeMenu();
+    }
+  });
+
+  // Cerrar automáticamente si la pantalla se redimensiona a escritorio (> 860px)
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 860 && dropdown.classList.contains("is-open")) {
+      closeMenu();
     }
   }, { passive: true });
 }
