@@ -6,35 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <!-- Primary Meta Tags -->
-  <title>La Boda de Luis & Vane — Invitación Oficial</title>
-  <meta name="title" content="La Boda de Luis & Vane — Invitación Oficial">
-  <meta name="description" content="Con la bendición de Dios y nuestras familias, celebramos nuestra unión matrimonial. Caracas, 04 & 05 de Diciembre de 2026.">
-  <meta name="theme-color" content="#F3EFE6">
+  <title>Vane & Luis — Invitación Oficial de Bodas</title>
+  <meta name="title" content="Vane & Luis — Invitación Oficial de Bodas">
+  <meta name="description" content="Con gran ilusión, invitamos a nuestra familia y amigos a celebrar nuestra unión en matrimonio civil. Caracas, Sábado 05 de Diciembre de 2026.">
+  <meta name="theme-color" content="#F6F3EC">
 
   <!-- OpenGraph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="./">
-  <meta property="og:title" content="La Boda de Luis & Vane — Invitación Oficial">
-  <meta property="og:description" content="Con la bendición de Dios y nuestras familias, celebramos nuestra unión matrimonial.">
-  <meta property="og:image" content="LuisVane.jpeg">
-  <meta property="og:image:alt" content="Luis & Vane">
+  <meta property="og:title" content="Vane & Luis — Invitación Oficial de Bodas">
+  <meta property="og:description" content="Con gran ilusión, invitamos a nuestra familia y amigos a celebrar nuestra unión en matrimonio civil. Caracas, Sábado 05 de Diciembre de 2026.">
+  <meta property="og:image" content="Foto2.jpeg">
+  <meta property="og:image:alt" content="Vane & Luis">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="La Boda de Luis & Vane — Invitación Oficial">
-  <meta property="twitter:description" content="Invitación Oficial a la Boda de Luis & Vane. Diciembre 2026, Caracas.">
-  <meta property="twitter:image" content="LuisVane.jpeg">
+  <meta property="twitter:title" content="Vane & Luis — Invitación Oficial de Bodas">
+  <meta property="twitter:description" content="Invitación Oficial a la Boda de Vanessa Fernández & Luis Fonten. Sábado 05 de Diciembre de 2026.">
+  <meta property="twitter:image" content="Foto2.jpeg">
 
   <!-- Google Fonts: Great Vibes, Pinyon Script & Cormorant Garamond -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- html2pdf.js for High-Precision PDF Download -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- jsPDF & html2canvas Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="vsl-landing">
 
@@ -50,9 +51,29 @@
   </svg>
 
   <!-- =========================================================================
-       SECCIÓN 1: HERO VSL & ESCENARIO PROTAGONISTA (Fondo Marfil #F3EFE6)
+       BARRA CABECERA ESTÁTICA (STICKY NAVBAR) — Fija durante todo el scroll
        ========================================================================= -->
-  <header class="vsl-section section-hero" id="hero-section">
+  <nav class="sticky-navbar" id="sticky-navbar" aria-label="Navegación principal">
+    <div class="navbar-container">
+      <a href="#inicio" class="navbar-brand">Vane & Luis</a>
+      <div class="navbar-links">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="#lugar-hora" class="nav-link">Lugar y Hora</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="#programa" class="nav-link">Programa</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="#vestimenta" class="nav-link">Vestimenta</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="#confirmar" class="nav-link nav-link-rsvp">Confirmar Asistencia</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       SECCIÓN 1: PORTADA PRINCIPAL (HERO VSL) — Fondo Marfil #F3EFE6
+       ========================================================================= -->
+  <header class="vsl-section section-hero" id="inicio">
     <div class="paper-grain" aria-hidden="true"></div>
 
     <!-- Rosas en Relieve Seco (Blind Embossing) en Esquinas Superiores -->
@@ -81,36 +102,38 @@
 
     <div class="vsl-container hero-container">
       
-      <!-- Pre-titular ceremonial -->
+      <!-- 1. Frase de Apertura Ceremonial -->
       <div class="hero-pretitle-wrapper">
-        <p class="hero-pretitle" id="hero-blessing-text">
-          CON LA BENDICIÓN DE DIOS Y NUESTRAS FAMILIAS • CELEBRAMOS NUESTRA UNIÓN
+        <p class="hero-pretitle">
+          CON GRAN ILUSIÓN, INVITAMOS A NUESTRA FAMILIA Y AMIGOS A CELEBRAR NUESTRA UNIÓN EN MATRIMONIO CIVIL
         </p>
         <div class="fine-divider" aria-hidden="true"></div>
       </div>
 
-      <!-- Titular Caligráfico Protagonista -->
+      <!-- 2. Título Central Limpio y Equilibrado (Centrado 100%, sin separar nombres de apellidos) -->
       <h1 class="hero-couple-title">
-        Luis <span class="hero-ampersand">&</span> Vane
+        <span class="hero-name-part" style="white-space: nowrap;">Vanessa Fernández</span>
+        <span class="hero-ampersand">&amp;</span>
+        <span class="hero-name-part" style="white-space: nowrap;">Luis Fonten</span>
       </h1>
 
-      <!-- Marco Editorial en Bajo Relieve (Fotografía de los Novios) -->
+      <!-- 3. Fotografía Central de la Pareja en Marco Passepartout en Bajo Relieve (Foto2) -->
       <div class="hero-photo-wrapper">
         <div class="passepartout-editorial-frame" id="passepartout-frame">
           <div class="editorial-bevel">
             <img 
               id="couple-photo" 
-              src="LuisVane.jpeg" 
-              alt="Luis & Vane brindando" 
+              src="Foto2.jpeg" 
+              alt="Vanessa Fernández & Luis Fonten" 
               class="editorial-img"
               loading="eager"
             >
-            <!-- Monograma Fallback de Respaldo -->
+            <!-- Monograma Fallback -->
             <div class="monogram-fallback" id="monogram-fallback" style="display: none;">
               <div class="monogram-emboss">
-                <span class="monogram-letter">L</span>
-                <span class="monogram-amp">&</span>
                 <span class="monogram-letter">V</span>
+                <span class="monogram-amp">&</span>
+                <span class="monogram-letter">L</span>
               </div>
               <p class="monogram-date">2026</p>
             </div>
@@ -118,51 +141,63 @@
         </div>
       </div>
 
-      <!-- Fecha Insignia en Formato Postal Clásico -->
+      <!-- 5. Título del Evento Principal -->
+      <h2 class="main-event-title">BRINDIS & RECEPCIÓN DE BODAS</h2>
+
+      <!-- 6. Bloque de Fecha con SÁBADO y 05 Central Destacado Estilo Postal -->
       <div class="insignia-date-wrapper">
+        <p class="day-highlight-label">SÁBADO</p>
         <div class="date-triptych">
-          <span class="triptych-month" id="hero-month-text">DICIEMBRE</span>
+          <span class="triptych-month">DICIEMBRE</span>
           <span class="triptych-separator" aria-hidden="true"></span>
-          <span class="triptych-day" id="hero-day-text">05</span>
+          <span class="triptych-day">05</span>
           <span class="triptych-separator" aria-hidden="true"></span>
-          <span class="triptych-year" id="hero-year-text">2026</span>
+          <span class="triptych-year">2026</span>
         </div>
-        <p class="hero-location-sub" id="hero-location-sub">
-          LOMAS DEL ÁVILA • CARACAS, VENEZUELA
-        </p>
       </div>
 
-      <!-- Contador Regresivo en Tiempo Real -->
-      <div class="countdown-section" aria-label="Cuenta regresiva para la boda">
-        <p class="countdown-label">FALTAN PARA ESTE GRAN DÍA</p>
+      <!-- 7. Contador Regresivo Hacia la Boda (05 de Diciembre de 2026 a las 15:00:00) -->
+      <div class="countdown-section" aria-label="Cuenta regresiva hacia la boda">
+        <p class="countdown-label">FALTAN PARA NUESTRA BODA</p>
         <div class="countdown-grid">
           <div class="countdown-card">
-            <span class="countdown-number" id="countdown-days">00</span>
+            <span class="countdown-number" id="wedding-countdown-days">00</span>
             <span class="countdown-unit">DÍAS</span>
           </div>
           <div class="countdown-card">
-            <span class="countdown-number" id="countdown-hours">00</span>
+            <span class="countdown-number" id="wedding-countdown-hours">00</span>
             <span class="countdown-unit">HORAS</span>
           </div>
           <div class="countdown-card">
-            <span class="countdown-number" id="countdown-minutes">00</span>
-            <span class="countdown-unit">MIN</span>
+            <span class="countdown-number" id="wedding-countdown-minutes">00</span>
+            <span class="countdown-unit">MINUTOS</span>
           </div>
           <div class="countdown-card">
-            <span class="countdown-number" id="countdown-seconds">00</span>
-            <span class="countdown-unit">SEG</span>
+            <span class="countdown-number" id="wedding-countdown-seconds">00</span>
+            <span class="countdown-unit">SEGUNDOS</span>
           </div>
         </div>
       </div>
 
-      <!-- Botón CTA Principal del Hero -->
-      <div class="hero-cta-wrapper">
-        <a href="#rsvp-section" class="btn-embossed btn-hero-cta">
-          <span class="btn-text">CONFIRMAR MI ASISTENCIA</span>
-          <svg class="btn-arrow-down" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
+      <!-- 8. Sello de Alto Impacto: Fecha Límite de Confirmación -->
+      <div class="deadline-highlight-badge">
+        <span class="badge-tag">FECHA LÍMITE DE CONFIRMACIÓN OBLIGATORIA</span>
+        <p class="badge-date">DOMINGO 22 DE NOVIEMBRE DE 2026</p>
+      </div>
+
+      <!-- 9. Botones de Acción del Hero -->
+      <div class="hero-actions-grid">
+        <a href="#confirmar" class="btn-embossed btn-primary-hero">
+          <span>CONFIRMAR ASISTENCIA</span>
         </a>
+        <button type="button" id="hero-download-pdf-btn" class="btn-subtle btn-secondary-hero">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>DESCARGAR INVITACIÓN EN PDF</span>
+        </button>
       </div>
 
     </div>
@@ -170,194 +205,394 @@
 
 
   <!-- =========================================================================
-       SECCIÓN 2: LAS DOS FECHAS DE NUESTRA BODA (Fondo Lino #DDD6CA)
+       SECCIÓN 2: LUGAR Y HORA (Sin redundancias de fecha, máxima claridad)
        ========================================================================= -->
-  <section class="vsl-section section-dates" id="dates-section">
+  <section class="vsl-section section-lugar-hora" id="lugar-hora">
     <div class="vsl-container">
       
-      <div class="section-title-wrapper">
-        <p class="section-tag">NUESTRA CELEBRACIÓN</p>
-        <h2 class="section-heading">Dos Momentos Inolvidables</h2>
+      <div class="section-title-wrapper text-center">
+        <p class="section-tag">INFORMACIÓN ESENCIAL</p>
+        <h2 class="section-heading">HORA & LUGAR DE LA RECEPCIÓN</h2>
         <div class="fine-divider" aria-hidden="true"></div>
       </div>
 
-      <div class="dates-cards-grid">
-        
-        <!-- Tarjeta 1: Preludio Íntimo (Civil - 4 de Diciembre) -->
-        <article class="cotton-card date-card date-card-civil">
-          <div class="paper-grain" aria-hidden="true"></div>
-          <div class="card-inner-emboss">
-            <span class="badge-ceremonial">PRELUDIO ÍNTIMO</span>
-            <h3 class="event-title">CEREMONIA CIVIL</h3>
-            
-            <div class="event-date-triptych">
-              <span>DICIEMBRE</span>
-              <span class="sep">|</span>
-              <span class="highlight-day">04</span>
-              <span class="sep">|</span>
-              <span>2026</span>
-            </div>
-
-            <p class="event-desc" id="civil-card-desc">
-              La firma de nuestra unión legal con la presencia de nuestros familiares más cercanos.
-            </p>
-            <p class="event-schedule-note" id="civil-card-time">
-              HORA: 11:00 AM (REGISTRO CIVIL)
-            </p>
-          </div>
-        </article>
-
-        <!-- Tarjeta 2: Evento Principal (Celebración - 5 de Diciembre) -->
-        <article class="cotton-card date-card date-card-main">
-          <div class="paper-grain" aria-hidden="true"></div>
-          
-          <!-- Rosas en relieve seco decorativas en la tarjeta principal -->
-          <div class="embossed-corner corner-top-right corner-mini" aria-hidden="true">
-            <svg viewBox="0 0 120 120" class="botanical-svg" fill="none" stroke="currentColor">
-              <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2"/>
-              <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2"/>
-              <circle cx="28" cy="28" r="4.5" stroke-width="1"/>
-            </svg>
-          </div>
-
-          <div class="card-inner-emboss">
-            <span class="badge-ceremonial badge-highlight">EVENTO PROTAGONISTA</span>
-            <h3 class="event-title">CELEBRACIÓN Y COMPARTIR</h3>
-            
-            <div class="event-date-triptych event-date-main">
-              <span>DICIEMBRE</span>
-              <span class="sep">|</span>
-              <span class="highlight-day">05</span>
-              <span class="sep">|</span>
-              <span>2026</span>
-            </div>
-
-            <p class="event-desc">
-              Nuestra fiesta, brindis y bendición junto a todos nuestros seres queridos para celebrar el amor.
-            </p>
-            <div class="event-place-box">
-              <p class="event-time" id="main-card-time">A LAS TRES DE LA TARDE (3:00 PM)</p>
-              <p class="event-location" id="main-card-place">LOMAS DEL ÁVILA • CARACAS</p>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =========================================================================
-       SECCIÓN 3: UBICACIÓN, DRESSCODE Y DESCARGA PDF (Fondo Marfil #F3EFE6)
-       ========================================================================= -->
-  <section class="vsl-section section-details" id="details-section">
-    <div class="paper-grain" aria-hidden="true"></div>
-    <div class="vsl-container">
-
-      <div class="section-title-wrapper">
-        <p class="section-tag">INFORMACIÓN PRÁCTICA</p>
-        <h2 class="section-heading">Detalles & Recepción</h2>
-        <div class="fine-divider" aria-hidden="true"></div>
-      </div>
-
-      <div class="details-triplet-grid">
-        
-        <!-- Tarjeta 1: Ubicación & Waze / Google Maps -->
-        <article class="cotton-card info-card">
-          <div class="card-inner-emboss">
-            <div class="info-card-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="info-card-title">UBICACIÓN</h3>
-            <p class="info-card-subtitle">Lomas del Ávila • Caracas</p>
-            <p class="info-card-text">
-              Dispondremos de control de acceso en garita de seguridad y estacionamiento privado para la tranquilidad de todos nuestros invitados.
-            </p>
-            <div class="card-btn-wrapper">
-              <a 
-                id="maps-link-btn" 
-                href="https://maps.google.com/?q=Lomas+del+Avila+Caracas+Venezuela" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="btn-subtle"
-              >
-                <span>ABRIR EN GOOGLE MAPS / WAZE</span>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Tarjeta 2: Dresscode & Paleta Sugerida -->
-        <article class="cotton-card info-card">
-          <div class="card-inner-emboss">
-            <div class="info-card-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
-              </svg>
-            </div>
-            <h3 class="info-card-title" id="dresscode-title">DRESSCODE</h3>
-            <p class="info-card-subtitle" id="dresscode-subtitle">ELEGANCIA FORMAL</p>
-            <p class="info-card-text" id="dresscode-note">
-              Queremos que luzcan elegantes y cómodos para celebrar este día junto a nosotros.
-            </p>
-            
-            <!-- Bolitas de Paleta de Colores Sugerida (Configurable) -->
-            <div class="palette-wrapper" id="palette-wrapper">
-              <p class="palette-label">PALETA SUGERIDA:</p>
-              <div class="palette-dots" id="palette-dots-container">
-                <!-- Generadas dinámicamente con app.js desde CONFIG.DRESSCODE.paletaColores -->
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Tarjeta 3: Descarga en PDF de Alta Precisión -->
-        <article class="cotton-card info-card">
-          <div class="card-inner-emboss">
-            <div class="info-card-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="12" y1="18" x2="12" y2="12"></line>
-                <polyline points="9 15 12 18 15 15"></polyline>
-              </svg>
-            </div>
-            <h3 class="info-card-title">INVITACIÓN FÍSICA</h3>
-            <p class="info-card-subtitle">Versión Postal en PDF</p>
-            <p class="info-card-text">
-              Descarga la tarjeta oficial en alta resolución en tu teléfono para guardarla como recuerdo o imprimirla.
-            </p>
-            <div class="card-btn-wrapper">
-              <button type="button" id="download-pdf-btn" class="btn-subtle">
-                <span id="download-pdf-text">DESCARGAR INVITACIÓN EN PDF</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =========================================================================
-       SECCIÓN 4: APARTADO DE COLABORACIÓN / PRESENTE (NUEVO - Fondo Lino #DDD6CA)
-       ========================================================================= -->
-  <section class="vsl-section section-colaboracion" id="colaboracion-section">
-    <div class="vsl-container">
-
-      <div class="colaboracion-card cotton-card">
+      <div class="cotton-card lugar-hora-main-card">
         <div class="paper-grain" aria-hidden="true"></div>
 
         <div class="card-inner-emboss text-center">
           
-          <!-- Ícono fino de Sobre Lacrado / Regalo Minimalista -->
+          <!-- Bloque 1: FECHA Y HORA DE RECEPCIÓN -->
+          <div class="recepcion-hora-box">
+            <div class="box-icon-container" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <p class="recepcion-label">FECHA Y HORA</p>
+            <p class="recepcion-time-display">SÁBADO 05 DE DICIEMBRE DE 2026 • 3:00 P.M.</p>
+            <p class="recepcion-sub-notice">
+              Puntualidad agradecida
+            </p>
+          </div>
+
+          <div class="horizontal-card-divider" aria-hidden="true"></div>
+
+          <!-- Bloque 2: LUGAR -->
+          <div class="recepcion-lugar-box">
+            <div class="box-icon-container" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <p class="recepcion-label">LUGAR DE CELEBRACIÓN</p>
+            <h3 class="recepcion-place-title">Urbanización Lomas del Ávila, Caracas</h3>
+            <p class="recepcion-venue-subtitle">Salón de Recepciones</p>
+            
+            <p class="recepcion-parking-desc">
+              <strong>Estacionamiento:</strong> Los invitados podrán estacionar cómodamente en la calle auxiliar ubicada justo frente al edificio, la cual cuenta con visibilidad directa desde el salón de fiestas.
+            </p>
+
+            <div class="recepcion-maps-action">
+              <a 
+                id="maps-link-btn" 
+                href="https://maps.app.goo.gl/YEGJ85v2MsxEsgWm8" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-embossed btn-action-large"
+              >
+                <span>VER UBICACIÓN EN GOOGLE MAPS</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /.lugar-hora-main-card -->
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECCIÓN 3: CRONOGRAMA DE LA TARDE — Fondo Lino #DDD6CA
+       ========================================================================= -->
+  <section class="vsl-section section-timeline" id="programa">
+    <div class="vsl-container">
+      
+      <div class="section-title-wrapper text-center">
+        <p class="section-tag">CRONOGRAMA OFICIAL</p>
+        <h2 class="section-heading">PROGRAMA DE NUESTRA CELEBRACIÓN</h2>
+        <p class="section-subheading">SÁBADO 05 DE DICIEMBRE DE 2026</p>
+        <div class="fine-divider" aria-hidden="true"></div>
+      </div>
+
+      <!-- Línea de tiempo vertical elegante -->
+      <div class="timeline-container">
+        
+        <!-- Bloque 1: 3:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-badge" aria-hidden="true">
+            <span class="badge-dot"></span>
+          </div>
+          <article class="cotton-card timeline-card">
+            <div class="paper-grain" aria-hidden="true"></div>
+            <div class="card-inner-emboss">
+              <span class="timeline-hour">3:00 PM</span>
+              <h3 class="timeline-title">Llegada, Recepción & Aperitivos de Bienvenida</h3>
+              <p class="timeline-desc">
+                Bienvenida a nuestros invitados y ubicación en sus mesas asignadas al compás de música bossa nova. Desde su llegada contarán con bebidas disponibles y nuestra estación de degustación y aperitivos de bienvenida para dar inicio a la tarde.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bloque 2: 4:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-badge" aria-hidden="true">
+            <span class="badge-dot"></span>
+          </div>
+          <article class="cotton-card timeline-card">
+            <div class="paper-grain" aria-hidden="true"></div>
+            <div class="card-inner-emboss">
+              <span class="timeline-hour">4:00 PM</span>
+              <h3 class="timeline-title">Palabras de los Novios, Anillos, Brindis & Corte del Pastel</h3>
+              <p class="timeline-desc">
+                Palabras de Vanessa & Luis, colocación de nuestros anillos, brindis oficial por nuestro matrimonio civil y corte tradicional de la torta de bodas.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bloque 3: 4:30 PM a 6:00 PM -->
+        <div class="timeline-item">
+          <div class="timeline-badge" aria-hidden="true">
+            <span class="badge-dot"></span>
+          </div>
+          <article class="cotton-card timeline-card">
+            <div class="paper-grain" aria-hidden="true"></div>
+            <div class="card-inner-emboss">
+              <span class="timeline-hour">4:30 PM A 6:00 PM</span>
+              <h3 class="timeline-title">Tarde de Música, Baile & Festejo</h3>
+              <p class="timeline-desc">
+                Apertura de música bailable y ronda de postres, bebidas y pasapalos para festejar juntos nuestra unión.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bloque 4: 6:00 PM en adelante -->
+        <div class="timeline-item">
+          <div class="timeline-badge" aria-hidden="true">
+            <span class="badge-dot"></span>
+          </div>
+          <article class="cotton-card timeline-card timeline-card-extended">
+            <div class="paper-grain" aria-hidden="true"></div>
+            <div class="card-inner-emboss">
+              <span class="timeline-hour timeline-hour-special">6:00 PM EN ADELANTE</span>
+              <h3 class="timeline-title">Tertulia Íntima de Cierre</h3>
+              <p class="timeline-desc">
+                Nuestra recepción oficial concluirá a las 6:00 PM. Sin embargo, los novios permaneceremos en el salón en un ambiente relajado hasta la medianoche. Quienes deseen extender la velada con nosotros serán bienvenidos a quedarse: si gustan, pueden traer su snack dulce o salado favorito o su bebida de preferencia para sumar a la mesa y seguir disfrutando entre amigos.
+              </p>
+            </div>
+          </article>
+        </div>
+
+      </div><!-- /.timeline-container -->
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECCIÓN 4: CÓDIGO DE VESTIMENTA (GUÍA EDITORIAL DE ALTA COSTURA & LINE ART)
+       ========================================================================= -->
+  <section class="vsl-section section-dresscode" id="vestimenta">
+    <div class="paper-grain" aria-hidden="true"></div>
+    <div class="vsl-container">
+
+      <div class="section-title-wrapper text-center">
+        <p class="section-tag">DRESS CODE EDITORIAL</p>
+        <h2 class="section-heading">CÓDIGO DE VESTIMENTA: SEMI-FORMAL / CÓCTEL ELEGANTE</h2>
+        <p class="section-subheading">Sugerencias y guía de inspiración para compartir juntos esta tarde</p>
+        <div class="fine-divider" aria-hidden="true"></div>
+      </div>
+
+      <!-- GUÍA EDITORIAL VISUAL DE ALTA COSTURA: 2 ILUSTRACIONES FASHION CROQUIS + TARJETAS DE INSPIRACIÓN -->
+      <div class="couture-dresscode-grid">
+        
+        <!-- CARD DAMAS (ELLAS) -->
+        <article class="cotton-card couture-fashion-card">
+          <div class="paper-grain" aria-hidden="true"></div>
+          <div class="card-inner-emboss">
+            
+            <div class="couture-card-header text-center">
+              <span class="couture-badge">ELLAS</span>
+              <h3 class="couture-role-title">Damas & Acompañantes</h3>
+              <p class="couture-role-subtitle">Elegancia fluida, midi o de dos piezas</p>
+            </div>
+
+            <!-- ILUSTRACIÓN SVG FASHION CROQUIS LINE-ART MINIMALISTA (DAMAS) -->
+            <div class="couture-illustration-wrapper">
+              <svg viewBox="0 0 160 260" class="couture-svg-croquis" fill="none" stroke="#2B2623" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Cabeza y peinado estilizado -->
+                <path d="M80 20 C73 20 69 26 71 34 C73 40 78 44 80 44 C82 44 87 40 89 34 C91 26 87 20 80 20 Z" stroke-width="1.2"/>
+                <path d="M72 26 C68 22 75 14 83 16 C90 18 92 24 88 30" stroke-width="1"/>
+                <path d="M80 44 L80 52" stroke-width="1.1"/>
+                <!-- Hombros y escote cóctel sutil -->
+                <path d="M62 58 C68 53 76 52 80 52 C84 52 92 53 98 58" stroke-width="1.4"/>
+                <path d="M62 58 L54 88 M98 58 L106 88" stroke-width="1.2"/>
+                <!-- Talle ceñido y corpiño -->
+                <path d="M67 62 C73 70 77 75 76 88 C76 96 73 104 74 108" stroke-width="1.4"/>
+                <path d="M93 62 C87 70 83 75 84 88 C84 96 87 104 86 108" stroke-width="1.4"/>
+                <!-- Cinturón o pretina sutil -->
+                <path d="M74 108 Q80 111 86 108" stroke-width="1.6"/>
+                <!-- Falda fluida corte cóctel con pliegues en movimiento -->
+                <path d="M74 108 C70 125 64 165 52 208 C65 212 95 214 110 206 C98 165 90 125 86 108" stroke-width="1.5"/>
+                <!-- Pliegues de caída y drapeado couture -->
+                <path d="M78 110 C76 135 73 175 66 210" stroke-width="0.9" opacity="0.6"/>
+                <path d="M82 110 C83 140 84 178 88 210" stroke-width="1" opacity="0.7"/>
+                <!-- Piernas y calzado de vestir estilizado -->
+                <path d="M74 211 L73 246 L76 248" stroke-width="1.2"/>
+                <path d="M87 210 L88 245 L91 247" stroke-width="1.2"/>
+                <!-- Detalle de pashmina o chal drapeado sobre hombros -->
+                <path d="M56 64 C50 78 52 105 56 120" stroke-width="0.9" stroke-dasharray="3 2" opacity="0.75"/>
+                <path d="M104 64 C110 78 108 105 104 120" stroke-width="0.9" stroke-dasharray="3 2" opacity="0.75"/>
+              </svg>
+            </div>
+
+            <!-- GUÍA DE PRENDAS SUGERIDAS (RECOMENDADO VS QUÉ EVITAR) -->
+            <div class="couture-guidelines-box">
+              <div class="guideline-group guideline-positive">
+                <span class="guide-badge-check">✓ RECOMENDADO</span>
+                <ul class="guide-bullets">
+                  <li><strong>Vestido Cóctel:</strong> Corte midi (a media pierna) o corte fluido elegante.</li>
+                  <li><strong>Enterizo (Jumpsuit) Sastre:</strong> De caída impecable y diseño de una pieza.</li>
+                  <li><strong>Conjunto Formal de Dos Piezas:</strong> Pantalón de vestir con blusa formal estructurada.</li>
+                  <li><strong>Para el Clima del Ávila:</strong> Blazer sastre, chaqueta corta o pashmina elegante.</li>
+                  <li><strong>Calzado:</strong> Sandalias de fiesta de vestir o calzado cerrado refinado.</li>
+                </ul>
+              </div>
+
+              <div class="guideline-group guideline-avoid">
+                <span class="guide-badge-cross">✕ QUÉ EVITAR</span>
+                <ul class="guide-bullets">
+                  <li><strong>Reservado para la Novia:</strong> Tonos blanco, marfil, hueso y crema.</li>
+                  <li>Vestidos largos de gala pesados o con pedrería excesiva.</li>
+                  <li>Jeans, franelas, prendas deportivas o calzado deportivo.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- CARD CABALLEROS (ELLOS) -->
+        <article class="cotton-card couture-fashion-card">
+          <div class="paper-grain" aria-hidden="true"></div>
+          <div class="card-inner-emboss">
+            
+            <div class="couture-card-header text-center">
+              <span class="couture-badge">ELLOS</span>
+              <h3 class="couture-role-title">Caballeros & Acompañantes</h3>
+              <p class="couture-role-subtitle">Corte sastre, blazer o camisa formal</p>
+              <p class="couture-role-desc">
+                Desde traje (flux) con o sin corbata, o combinación de blazer/chaqueta con pantalón de vestir, hasta pantalón de corte chino o gabardina (en tonos oscuros o neutros como gris, marrón, caqui o beige) con camisa manga larga. Para el clima de la tarde pueden sumar una chaqueta, saco o suéter de vestir. Calzado cerrado de vestir, botas de vestir o calzado casual sobrio.
+              </p>
+            </div>
+
+            <!-- ILUSTRACIÓN SVG FASHION CROQUIS LINE-ART MINIMALISTA (CABALLEROS) -->
+            <div class="couture-illustration-wrapper">
+              <svg viewBox="0 0 160 260" class="couture-svg-croquis" fill="none" stroke="#2B2623" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Cabeza y cuello formal -->
+                <path d="M80 18 C74 18 70 23 72 32 C74 38 78 42 80 42 C82 42 86 38 88 32 C90 23 86 18 80 18 Z" stroke-width="1.2"/>
+                <path d="M72 23 C74 16 86 16 88 23" stroke-width="1"/>
+                <path d="M77 42 L77 48 M83 42 L83 48" stroke-width="1.1"/>
+                <!-- Cuello de camisa y solapa de saco / blazer -->
+                <path d="M73 48 L80 58 L87 48" stroke-width="1.3"/>
+                <!-- Corbata sutil / opción cuello formal -->
+                <path d="M78 54 L82 54 L81 76 L80 80 L79 76 Z" stroke-width="1"/>
+                <!-- Hombros estructurados y silueta sastre -->
+                <path d="M50 56 L80 48 L110 56" stroke-width="1.6"/>
+                <path d="M50 56 L42 122 L52 124 L58 96" stroke-width="1.3"/>
+                <path d="M110 56 L118 122 L108 124 L102 96" stroke-width="1.3"/>
+                <!-- Solapas del saco cruzadas -->
+                <path d="M62 54 L76 96 L76 136 L84 136 L84 96 L98 54" stroke-width="1.4"/>
+                <line x1="80" y1="96" x2="80" y2="134" stroke-width="1.2"/>
+                <!-- Pantalón sastre o chino con corte impecable -->
+                <path d="M58 136 L52 244 L68 244 L78 160 L82 160 L92 244 L108 244 L102 136" stroke-width="1.5"/>
+                <!-- Raya planchada de pantalón -->
+                <line x1="62" y1="148" x2="60" y2="242" stroke-width="0.8" opacity="0.6"/>
+                <line x1="98" y1="148" x2="100" y2="242" stroke-width="0.8" opacity="0.6"/>
+                <!-- Zapatos de vestir elegantes -->
+                <path d="M50 244 L68 244 L70 250 L48 250 Z" stroke-width="1.2"/>
+                <path d="M92 244 L110 244 L112 250 L90 250 Z" stroke-width="1.2"/>
+              </svg>
+            </div>
+
+            <!-- GUÍA DE PRENDAS SUGERIDAS (RECOMENDADO VS QUÉ EVITAR) -->
+            <div class="couture-guidelines-box">
+              <div class="guideline-group guideline-positive">
+                <span class="guide-badge-check">✓ RECOMENDADO</span>
+                <ul class="guide-bullets">
+                  <li><strong>Traje (Flux) Completo:</strong> Con o sin corbata, en tonos neutros o sobrios.</li>
+                  <li><strong>Blazer / Chaqueta Formal:</strong> Combinado con pantalón de vestir o corte chino.</li>
+                  <li><strong>Camisa Manga Larga:</strong> De cuello formal planchado.</li>
+                  <li><strong>Para el Clima del Ávila:</strong> Chaqueta estructurada o suéter ligero de vestir.</li>
+                  <li><strong>Calzado:</strong> Calzado cerrado de vestir, botas de vestir o calzado casual sobrio.</li>
+                </ul>
+              </div>
+
+              <div class="guideline-group guideline-avoid">
+                <span class="guide-badge-cross">✕ QUÉ EVITAR</span>
+                <ul class="guide-bullets">
+                  <li>Jeans de cualquier color (especialmente azules o desgastados).</li>
+                  <li>Franelas, remeras, chemises / polos y prendas deportivas.</li>
+                  <li>Calzado deportivo (sneakers blancos o de colores) o sandalias.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /.couture-dresscode-grid -->
+
+      <!-- PALETA DE COLORES SUGERIDOS -->
+      <div class="cotton-card palette-showcase-card">
+        <div class="card-inner-emboss text-center">
+          <p class="palette-showcase-tag">PALETA DE COLORES SUGERIDA</p>
+          <h4 class="palette-showcase-title">Tonos Armónicos para la Tarde</h4>
+          <p class="palette-showcase-desc">Sugerimos tonos sobrios, elegantes y cálidos para complementar la estética de nuestra boda:</p>
+
+          <div class="palette-swatches-row">
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #A37854;"></span>
+              <span class="swatch-name">Tonos Tierra</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #68785A;"></span>
+              <span class="swatch-name">Verde Salvia</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #B85D43;"></span>
+              <span class="swatch-name">Terracota</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #1E2C4A;"></span>
+              <span class="swatch-name">Azul Marino</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #C4A265;"></span>
+              <span class="swatch-name">Dorado Suave</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch-circle" style="background-color: #24201C;"></span>
+              <span class="swatch-name">Negro Sobrio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECUADRO EN RELIEVE: NOTA DE ETIQUETA -->
+      <div class="etiquette-box">
+        <p class="etiquette-title">NOTA DE ETIQUETA Y ARMONÍA</p>
+        <p class="etiquette-text">
+          Para conservar la armonía y solemnidad de nuestra celebración, agradecemos de corazón reservar los tonos blanco, hueso, marfil y crema exclusivamente para la novia, así como abstenerse del uso de jeans, franelas, prendas deportivas o calzado deportivo.
+        </p>
+      </div>
+
+      <!-- DESCARGA EN PDF DE LA INVITACIÓN -->
+      <div class="pdf-card-wrapper text-center">
+        <button type="button" id="download-pdf-btn" class="btn-subtle btn-action-large">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <polyline points="9 15 12 18 15 15"></polyline>
+          </svg>
+          <span id="download-pdf-text">DESCARGAR INVITACIÓN OFICIAL EN PDF</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECCIÓN 5: UN DETALLE DE CARIÑO — Fondo Lino #DDD6CA
+       ========================================================================= -->
+  <section class="vsl-section section-presents" id="presentes">
+    <div class="vsl-container">
+
+      <div class="cotton-card presents-main-card">
+        <div class="paper-grain" aria-hidden="true"></div>
+
+        <div class="card-inner-emboss text-center">
+          
+          <!-- Ícono de Sello de Regalo Fino -->
           <div class="seal-icon-wrapper" aria-hidden="true">
             <svg viewBox="0 0 48 48" class="seal-icon" fill="none" stroke="currentColor">
-              <!-- Sello de lacre / Sobre refinado -->
               <rect x="6" y="12" width="36" height="24" rx="2" stroke-width="1.6"/>
               <path d="M6,13 L24,26 L42,13" stroke-width="1.5" stroke-linecap="round"/>
               <circle cx="24" cy="26" r="6" stroke-width="1.4" fill="#F3EFE6"/>
@@ -365,68 +600,126 @@
             </svg>
           </div>
 
-          <!-- Título en Mayúsculas Espaciadas (Editable en CONFIG) -->
-          <h2 class="colaboracion-title" id="colaboracion-title">
-            DETALLE DE CARIÑO & COLABORACIÓN
-          </h2>
+          <h2 class="presents-title">UN DETALLE DE CARIÑO</h2>
           <div class="fine-divider" aria-hidden="true"></div>
 
-          <!-- Mensaje Principal (Editable en CONFIG) -->
-          <p class="colaboracion-message" id="colaboracion-message">
-            Su presencia y compañía en este día tan especial es nuestro mejor regalo. Si desean tener un detalle o colaborar con el inicio de nuestra vida juntos, hemos dispuesto este espacio con mucho cariño.
+          <p class="presents-message">
+            Su presencia y compañía en este día tan especial es nuestro mayor regalo. Si desean tener un detalle para este momento tan importante para nosotros, hemos dispuesto este espacio con mucho cariño.
           </p>
 
-          <!-- Módulo Desplegable Opcional de Datos Bancarios/Transferencia -->
-          <div class="colaboracion-extra-module" id="colaboracion-extra-module">
-            
+          <!-- Botón Desplegable Táctil -->
+          <div class="presents-toggle-wrapper">
             <button 
               type="button" 
-              class="btn-toggle-colaboracion" 
-              id="btn-toggle-colaboracion" 
+              class="btn-embossed btn-toggle-presents" 
+              id="btn-toggle-presentes" 
               aria-expanded="false"
-              aria-controls="colaboracion-details-content"
+              aria-controls="presents-options-content"
             >
-              <span id="colaboracion-toggle-text">Ver información de colaboración</span>
+              <span id="presents-toggle-text">VER OPCIONES PARA PRESENTES</span>
               <svg class="toggle-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
+          </div>
 
-            <div class="colaboracion-details-content" id="colaboracion-details-content" style="display: none;">
-              <div class="colaboracion-info-box" id="colaboracion-info-box">
-                <!-- Se llena dinámicamente con los datos de CONFIG.COLABORACION.datosExtra -->
-              </div>
+          <!-- Contenido Desplegable (4 Tarjetas en Papel Marfil) -->
+          <div class="presents-options-content" id="presents-options-content" style="display: none;">
+            <div class="presents-grid">
               
-              <button type="button" class="btn-copy-data" id="btn-copy-colaboracion">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span id="copy-btn-text">COPIAR DATOS DE COLABORACIÓN</span>
-              </button>
-            </div>
+              <!-- 1. Efectivo -->
+              <div class="present-card">
+                <div class="present-card-header">
+                  <span class="present-card-icon">✉</span>
+                  <h4 class="present-card-title">Efectivo</h4>
+                </div>
+                <p class="present-card-body">
+                  Pueden entregarlo en un sobre el día del evento.
+                </p>
+              </div>
 
-          </div><!-- /.colaboracion-extra-module -->
+              <!-- 2. Transferencia Bancaria (Banco Mercantil) -->
+              <div class="present-card">
+                <div class="present-card-header">
+                  <span class="present-card-icon">🏦</span>
+                  <h4 class="present-card-title">Transferencia Bancaria</h4>
+                </div>
+                <div class="present-card-details">
+                  <p><strong>Banco:</strong> Mercantil</p>
+                  <p><strong>Titular:</strong> Luis Fonten</p>
+                  <p><strong>C.I.:</strong> V-20.821.696</p>
+                  <p><strong>Tipo:</strong> Ahorro</p>
+                  <p class="account-number-mono"><strong>Cuenta:</strong> 01050618210618500979</p>
+                </div>
+                <div class="present-card-actions">
+                  <button type="button" class="btn-copy-chip" id="copy-cuenta-btn">
+                    <span>Copiar Cuenta</span>
+                  </button>
+                  <button type="button" class="btn-copy-chip" id="copy-transferencia-completa-btn">
+                    <span>Copiar Datos Completos</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 3. Pago Móvil -->
+              <div class="present-card">
+                <div class="present-card-header">
+                  <span class="present-card-icon">📱</span>
+                  <h4 class="present-card-title">Pago Móvil</h4>
+                </div>
+                <div class="present-card-details">
+                  <p><strong>Banco:</strong> 0105 - Mercantil</p>
+                  <p class="account-number-mono"><strong>Teléfono:</strong> 04126000406</p>
+                  <p class="account-number-mono"><strong>C.I.:</strong> V-20821696</p>
+                </div>
+                <div class="present-card-actions">
+                  <button type="button" class="btn-copy-chip" id="copy-pagomovil-tel-btn">
+                    <span>Copiar Teléfono</span>
+                  </button>
+                  <button type="button" class="btn-copy-chip" id="copy-pagomovil-ci-btn">
+                    <span>Copiar Cédula</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 4. Binance Pay (USDT) -->
+              <div class="present-card">
+                <div class="present-card-header">
+                  <span class="present-card-icon">💎</span>
+                  <h4 class="present-card-title">Binance Pay (USDT)</h4>
+                </div>
+                <div class="present-card-details">
+                  <p class="account-number-mono"><strong>Email:</strong> ing.luisfonten@gmail.com</p>
+                </div>
+                <div class="present-card-actions">
+                  <button type="button" class="btn-copy-chip" id="copy-binance-email-btn">
+                    <span>Copiar Correo Binance</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /.presents-options-content -->
 
         </div>
-      </div><!-- /.colaboracion-card -->
+      </div><!-- /.presents-main-card -->
 
     </div>
   </section>
 
 
   <!-- =========================================================================
-       SECCIÓN 5: FORMULARIO DE CONFIRMACIÓN SECRETA (RSVP INTEGRADO - Fondo Marfil #F3EFE6)
+       SECCIÓN 6: CONFIRMACIÓN DE ASISTENCIA (RSVP) — Fondo Marfil #F3EFE6
        ========================================================================= -->
-  <section class="vsl-section section-rsvp" id="rsvp-section">
+  <section class="vsl-section section-rsvp" id="confirmar">
     <div class="paper-grain" aria-hidden="true"></div>
     <div class="vsl-container">
 
-      <!-- Tarjeta amplia de confirmación con 4 rosas en relieve seco -->
+      <!-- Tarjeta principal de confirmación con 4 rosas repujadas -->
       <div class="cotton-card rsvp-main-card">
         <div class="paper-grain" aria-hidden="true"></div>
 
-        <!-- Rosas en las 4 esquinas interiores -->
+        <!-- 4 Rosas en las esquinas -->
         <div class="embossed-corner corner-top-left" aria-hidden="true">
           <svg viewBox="0 0 120 120" class="botanical-svg" fill="none" stroke="currentColor">
             <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2"/>
@@ -458,185 +751,149 @@
 
         <div class="card-inner-emboss">
           
+          <!-- Encabezado RSVP -->
           <header class="rsvp-header text-center">
-            <p class="rsvp-tag">CONFIRMACIÓN OFICIAL</p>
             <h2 class="rsvp-title">RSVP</h2>
-            <p class="rsvp-deadline-badge" id="rsvp-deadline-text">
-              FAVOR CONFIRMAR ASISTENCIA ANTES DEL 20 DE NOVIEMBRE
-            </p>
-            <p class="rsvp-intro-text">
-              Por favor completa este formulario con los datos de tu grupo familiar para organizar con esmero cada detalle y lugar de recepción.
-            </p>
-            <div class="fine-divider" aria-hidden="true"></div>
+            <!-- Sello de Alto Impacto para la Fecha Límite -->
+            <div class="deadline-highlight-badge deadline-badge-rsvp">
+              <span class="badge-tag">FAVOR CONFIRMAR ASISTENCIA ANTES DEL</span>
+              <p class="badge-date">DOMINGO 22 DE NOVIEMBRE DE 2026</p>
+            </div>
           </header>
 
-          <!-- Banner Local de Confirmación Previa si ya confirmó -->
+          <!-- Contador Regresivo #2 (Cierre de Confirmaciones: 22 de Noviembre de 2026 a las 23:59:59) -->
+          <div class="countdown-section rsvp-deadline-countdown" aria-label="Tiempo restante para confirmar">
+            <p class="countdown-label">TIEMPO RESTANTE PARA EL CIERRE DE CONFIRMACIONES</p>
+            <div class="countdown-grid">
+              <div class="countdown-card">
+                <span class="countdown-number" id="rsvp-countdown-days">00</span>
+                <span class="countdown-unit">DÍAS</span>
+              </div>
+              <div class="countdown-card">
+                <span class="countdown-number" id="rsvp-countdown-hours">00</span>
+                <span class="countdown-unit">HORAS</span>
+              </div>
+              <div class="countdown-card">
+                <span class="countdown-number" id="rsvp-countdown-minutes">00</span>
+                <span class="countdown-unit">MINUTOS</span>
+              </div>
+              <div class="countdown-card">
+                <span class="countdown-number" id="rsvp-countdown-seconds">00</span>
+                <span class="countdown-unit">SEGUNDOS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nota de Cupos Reservados (Filtro Anti-Colados) -->
+          <div class="reserved-seats-notice">
+            <p class="notice-title">CUPOS RESERVADOS EN MESA</p>
+            <p class="notice-text">
+              Por tratarse de una recepción íntima con asientos asignados, la asistencia es exclusiva para las personas contempladas en nuestra lista de invitados. Si estás confirmando en nombre de tu grupo familiar invitado, por favor añade un renglón individual por cada familiar confirmado.
+            </p>
+          </div>
+
+          <!-- Banner Local de Confirmación Previa si ya confirmó en este navegador -->
           <div class="local-status-banner" id="local-status-banner" style="display: none;">
             <div class="status-icon">✓</div>
             <div class="status-content">
               <p class="status-heading">¡Ya tenemos tu confirmación guardada!</p>
               <p class="status-sub" id="status-summary-text"></p>
             </div>
-            <button type="button" class="btn-text-link" id="reopen-rsvp-btn">Volver a registrar</button>
+            <button type="button" class="btn-text-link" id="reopen-rsvp-btn">Modificar / Ver</button>
           </div>
 
-          <!-- FORMULARIO RSVP INTEGRADO -->
+          <!-- FORMULARIO RSVP EN ORDEN ESTRICTO -->
           <form id="rsvp-form" class="rsvp-form" novalidate>
             
-            <!-- 1. INVITADO PRINCIPAL -->
-            <fieldset class="form-fieldset">
-              <legend class="fieldset-legend">1. Datos del Invitado Principal</legend>
-
-              <div class="form-group">
-                <label for="nombre-principal" class="form-label">
-                  Nombre y Apellido <span class="required">*</span>
+            <!-- PASO 1 — Botón Selector de Confirmación -->
+            <div class="form-group rsvp-step-1">
+              <label class="form-label text-center">¿Asistirás a nuestra Boda? <span class="required">*</span></label>
+              <div class="radio-card-group attendance-selector-grid">
+                <label class="radio-card">
+                  <input type="radio" name="asistencia_principal" value="Sí asistirá" checked>
+                  <span class="radio-card-content">
+                    <span class="radio-indicator"></span>
+                    <span class="radio-text">¡Sí, asistiré con mucho gusto!</span>
+                  </span>
                 </label>
-                <input 
-                  type="text" 
-                  id="nombre-principal" 
-                  name="nombre_principal" 
-                  class="form-input" 
-                  placeholder="Ej. María Elena Pérez" 
-                  required 
-                  autocomplete="name"
-                  maxlength="90"
-                >
-                <span class="field-error" id="error-nombre-principal"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="telefono-principal" class="form-label">
-                  Teléfono / WhatsApp de Contacto <span class="required">*</span>
+                <label class="radio-card">
+                  <input type="radio" name="asistencia_principal" value="No podrá asistir">
+                  <span class="radio-card-content">
+                    <span class="radio-indicator"></span>
+                    <span class="radio-text">No podré asistir</span>
+                  </span>
                 </label>
-                <input 
-                  type="tel" 
-                  id="telefono-principal" 
-                  name="telefono_principal" 
-                  class="form-input" 
-                  placeholder="Ej. +58 414 1234567" 
-                  required 
-                  autocomplete="tel"
-                  maxlength="25"
-                >
-                <span class="field-error" id="error-telefono-principal"></span>
               </div>
+            </div>
 
-              <!-- Asistencia 5 de Diciembre -->
-              <div class="form-group">
-                <span class="form-label">
-                  ¿Nos acompañas a la Celebración del Sábado 05 de Diciembre? <span class="required">*</span>
-                </span>
-                <div class="radio-card-group">
-                  <label class="radio-card">
-                    <input type="radio" name="asiste_5_dic_principal" value="SI" checked>
-                    <span class="radio-card-content">
-                      <span class="radio-indicator"></span>
-                      <span class="radio-text">¡Sí, asistiré con mucho gusto!</span>
-                    </span>
-                  </label>
-                  <label class="radio-card">
-                    <input type="radio" name="asiste_5_dic_principal" value="NO">
-                    <span class="radio-card-content">
-                      <span class="radio-indicator"></span>
-                      <span class="radio-text">No podré asistir, los acompaño de corazón</span>
-                    </span>
-                  </label>
-                </div>
-              </div>
+            <!-- PASO 2 — Nombre del Invitado Principal y Contacto -->
+            <div class="form-group rsvp-step-2">
+              <label for="nombre-principal" class="form-label">
+                Nombre y Apellido del Invitado Principal <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="nombre-principal" 
+                name="nombre_principal" 
+                class="form-input" 
+                placeholder="Ej. Carolina González" 
+                required 
+                autocomplete="name"
+                maxlength="90"
+              >
+              <span class="field-error" id="error-nombre-principal"></span>
+            </div>
 
-              <!-- Asistencia 4 de Diciembre (Civil - Configurable) -->
-              <div class="form-group" id="civil-option-group">
-                <span class="form-label">
-                  ¿Asistirás a la Ceremonia Civil (Viernes 04 de Diciembre)?
-                </span>
-                <div class="radio-pill-group">
-                  <label class="radio-pill">
-                    <input type="radio" name="asiste_4_dic_principal" value="SI">
-                    <span>Sí asistiré al Civil</span>
-                  </label>
-                  <label class="radio-pill">
-                    <input type="radio" name="asiste_4_dic_principal" value="NO" checked>
-                    <span>Solo a la Celebración del 5</span>
-                  </label>
-                </div>
-              </div>
+            <div class="form-group rsvp-step-2">
+              <label for="telefono-principal" class="form-label">
+                Teléfono / WhatsApp de contacto <span class="required">*</span>
+              </label>
+              <input 
+                type="tel" 
+                id="telefono-principal" 
+                name="telefono_principal" 
+                class="form-input" 
+                placeholder="Ej. +58 412 1234567" 
+                required 
+                autocomplete="tel"
+                maxlength="25"
+              >
+              <span class="field-error" id="error-telefono-principal"></span>
+            </div>
 
-              <!-- Restricciones Alimentarias Principal -->
-              <div class="form-group">
-                <label for="restriccion-principal" class="form-label">
-                  Preferencia o Restricción Alimentaria
-                </label>
-                <select id="restriccion-principal" name="restriccion_principal" class="form-select">
-                  <option value="Ninguna">Ninguna (Menú tradicional)</option>
-                  <option value="Vegetariano">Vegetariano</option>
-                  <option value="Vegano">Vegano</option>
-                  <option value="Sin Gluten">Sin Gluten (Celíaco)</option>
-                  <option value="Alergia">Alergia específica (indicar abajo)</option>
-                </select>
-                <input 
-                  type="text" 
-                  id="otra-alergia-principal" 
-                  class="form-input sub-input" 
-                  placeholder="Especificar alergia (ej. mariscos, maní...)" 
-                  style="display: none;"
-                  maxlength="70"
-                >
-              </div>
-
-            </fieldset>
-
-            <!-- 2. GESTIÓN DINÁMICA DE ACOMPAÑANTES Y GRUPO FAMILIAR -->
-            <fieldset class="form-fieldset">
-              <div class="fieldset-header-action">
-                <legend class="fieldset-legend">2. Familiares o Acompañantes Invitados</legend>
-                <p class="fieldset-help">
-                  Si tu invitación contempla a tu cónyuge, hijos u otros familiares, puedes agregarlos a continuación para confirmar en una sola gestión.
-                </p>
-              </div>
-
-              <!-- Contenedor dinámico de acompañantes -->
-              <div id="companions-container" class="companions-container">
-                <!-- Se inyectan dinámicamente con JS -->
+            <!-- PASO 3 — Botón Inmediato para Agregar Familiares -->
+            <div class="form-group rsvp-step-3">
+              <div id="lista-familiares" class="lista-familiares-container">
+                <!-- Renglones de familiares insertados dinámicamente con JS -->
               </div>
 
               <button 
                 type="button" 
-                id="add-companion-btn" 
-                class="btn-add-companion"
+                id="add-familiar-btn" 
+                class="btn-add-familiar"
               >
                 <span class="add-icon">+</span>
-                <span>Agregar familiar o acompañante invitado</span>
+                <span>Agregar familiar invitado</span>
               </button>
-            </fieldset>
+            </div>
 
-            <!-- 3. MENSAJE PARA LUIS & VANE -->
-            <fieldset class="form-fieldset">
-              <legend class="fieldset-legend">3. Mensaje de Cariño (Opcional)</legend>
-              <div class="form-group">
-                <label for="mensaje-novios" class="form-label">
-                  Dedicatoria, bendición o palabras para los novios:
-                </label>
-                <textarea 
-                  id="mensaje-novios" 
-                  name="mensaje_novios" 
-                  class="form-textarea" 
-                  rows="3" 
-                  placeholder="Escribe tu dedicatoria aquí..."
-                  maxlength="400"
-                ></textarea>
-              </div>
-            </fieldset>
+            <!-- PASO 4 — Mensaje opcional -->
+            <div class="form-group rsvp-step-4">
+              <label for="mensaje-novios" class="form-label">
+                Mensaje de cariño para Vane & Luis (Opcional)
+              </label>
+              <textarea 
+                id="mensaje-novios" 
+                name="mensaje_novios" 
+                class="form-textarea" 
+                rows="3" 
+                placeholder="Escribe tu dedicatoria o bendición para los novios..."
+                maxlength="400"
+              ></textarea>
+            </div>
 
-            <!-- ACCIONES DE ENVÍO -->
-            <div class="form-actions">
-              <p class="privacy-note">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-                Confirmación confidencial para el protocolo y mesas de la boda.
-              </p>
-
+            <!-- PASO 5 — Botón de Envío Final -->
+            <div class="form-actions rsvp-step-5">
               <button type="submit" id="submit-rsvp-btn" class="btn-embossed btn-submit">
                 <span class="spinner" id="submit-spinner" style="display: none;"></span>
                 <span class="btn-text" id="submit-btn-text">ENVIAR CONFIRMACIÓN</span>
@@ -645,7 +902,7 @@
 
           </form>
 
-          <!-- VISTA DE ÉXITO INTEGRADA -->
+          <!-- VISTA DE ÉXITO INTEGRADA TRAS ENVIAR -->
           <div class="success-card" id="form-success-view" style="display: none;">
             <div class="success-monogram-badge">
               <span class="check-symbol">✓</span>
@@ -653,7 +910,7 @@
             
             <h3 class="success-title">¡Confirmación Recibida!</h3>
             <p class="success-lead">
-              Agradecemos de corazón que te hayas tomado el momento de confirmar tu asistencia.
+              Agradecemos profundamente que te hayas tomado el momento de confirmar.
             </p>
 
             <div class="success-summary-box" id="success-summary-content">
@@ -666,7 +923,7 @@
 
             <div class="success-actions">
               <button type="button" class="btn-subtle" id="reset-form-btn">
-                <span>REGISTRAR OTRA RESPUESTA O FAMILIAR</span>
+                <span>MODIFICAR O REGISTRAR OTRO INVITADO</span>
               </button>
             </div>
           </div>
@@ -679,95 +936,186 @@
 
 
   <!-- =========================================================================
-       SECCIÓN 6: FOOTER MINIMALISTA
+       SECCIÓN 7: CIERRE DE LA INVITACIÓN & PIE DE PÁGINA (FOOTER)
        ========================================================================= -->
-  <footer class="vsl-footer">
+  <footer class="vsl-footer" id="main-footer">
     <div class="vsl-container text-center">
-      <p class="footer-names">Luis & Vane</p>
-      <p class="footer-details">04 & 05 DE DICIEMBRE DE 2026 • LOMAS DEL ÁVILA • CARACAS</p>
-      <p class="footer-copyright">LA BODA DE LUIS & VANE • INVITACIÓN OFICIAL</p>
+      <!-- Firma exclusiva en caligrafía grande y fecha discreta -->
+      <p class="footer-names">Vane & Luis</p>
+      <p class="footer-date-line">05 · XII · 2026</p>
     </div>
   </footer>
 
 
   <!-- =========================================================================
-       BARRA FLOTANTE INFERIOR EN MÓVIL (STICKY MOBILE CTA)
+       BOTÓN FLOTANTE PERMANENTE (CTA FLOTANTE) — Centrado abajo, se oculta en #confirmar
        ========================================================================= -->
   <div class="sticky-mobile-cta" id="sticky-mobile-cta">
-    <a href="#rsvp-section" class="btn-embossed btn-sticky-cta" id="sticky-cta-btn">
-      <span>CONFIRMAR ASISTENCIA (ANTES DEL 20 NOV)</span>
+    <a href="#confirmar" class="btn-embossed btn-sticky-cta" id="sticky-cta-btn">
+      <span>CONFIRMAR ASISTENCIA (ANTES DEL 22 NOV)</span>
     </a>
   </div>
 
 
   <!-- =========================================================================
-       CONTENEDOR DE LA POSTAL CLÁSICA PARA DESCARGA EN PDF (html2pdf.js)
-       Este bloque recrea la postal clásica física de 1 página de alto impacto
+       POSTAL NUPCIAL DESCARGABLE EN PDF (#printable-postcard)
+       Dimensiones fijas exactas A4 (794px x 1123px) en HTML/CSS puro con carisma visual
        ========================================================================= -->
-  <div id="printable-postcard" class="printable-postcard" aria-hidden="true">
+  <div id="printable-postcard" class="printable-postcard" aria-hidden="true" style="display: none;">
     <div class="postcard-canvas">
       
-      <!-- Esquinas en relieve de la postal -->
-      <div class="embossed-corner corner-top-left" aria-hidden="true">
-        <svg viewBox="0 0 120 120" class="botanical-svg" fill="none" stroke="currentColor">
-          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2"/>
-          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2"/>
+      <!-- Rosas en Relieve Seco (Blind Embossing) en las 4 Esquinas -->
+      <div class="postcard-embossed-corner corner-top-left">
+        <svg viewBox="0 0 120 120" class="postcard-botanical-svg" fill="none" stroke="currentColor">
+          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M35,35 C28,26 18,25 15,32 C12,38 18,48 26,45 C32,43 38,38 35,35 Z" stroke-width="1.1"/>
+          <path d="M22,28 C26,22 34,22 36,27 C38,32 30,37 25,34" stroke-width="0.9"/>
           <circle cx="28" cy="28" r="4.5" stroke-width="1"/>
+          <path d="M14,14 L108,14" stroke-width="0.6" stroke-dasharray="2 3"/>
+          <path d="M14,14 L14,108" stroke-width="0.6" stroke-dasharray="2 3"/>
         </svg>
       </div>
-      <div class="embossed-corner corner-top-right" aria-hidden="true">
-        <svg viewBox="0 0 120 120" class="botanical-svg" fill="none" stroke="currentColor">
-          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2"/>
-          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2"/>
+      <div class="postcard-embossed-corner corner-top-right">
+        <svg viewBox="0 0 120 120" class="postcard-botanical-svg" fill="none" stroke="currentColor">
+          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M35,35 C28,26 18,25 15,32 C12,38 18,48 26,45 C32,43 38,38 35,35 Z" stroke-width="1.1"/>
+          <path d="M22,28 C26,22 34,22 36,27 C38,32 30,37 25,34" stroke-width="0.9"/>
           <circle cx="28" cy="28" r="4.5" stroke-width="1"/>
+          <path d="M14,14 L108,14" stroke-width="0.6" stroke-dasharray="2 3"/>
+          <path d="M14,14 L14,108" stroke-width="0.6" stroke-dasharray="2 3"/>
+        </svg>
+      </div>
+      <div class="postcard-embossed-corner corner-bottom-left">
+        <svg viewBox="0 0 120 120" class="postcard-botanical-svg" fill="none" stroke="currentColor">
+          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M35,35 C28,26 18,25 15,32 C12,38 18,48 26,45 C32,43 38,38 35,35 Z" stroke-width="1.1"/>
+          <path d="M22,28 C26,22 34,22 36,27 C38,32 30,37 25,34" stroke-width="0.9"/>
+          <circle cx="28" cy="28" r="4.5" stroke-width="1"/>
+          <path d="M14,14 L108,14" stroke-width="0.6" stroke-dasharray="2 3"/>
+          <path d="M14,14 L14,108" stroke-width="0.6" stroke-dasharray="2 3"/>
+        </svg>
+      </div>
+      <div class="postcard-embossed-corner corner-bottom-right">
+        <svg viewBox="0 0 120 120" class="postcard-botanical-svg" fill="none" stroke="currentColor">
+          <path d="M12,12 C40,15 65,30 80,60 C85,70 88,85 86,105" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12,12 C15,40 30,65 60,80 C70,85 85,88 105,86" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M35,35 C28,26 18,25 15,32 C12,38 18,48 26,45 C32,43 38,38 35,35 Z" stroke-width="1.1"/>
+          <path d="M22,28 C26,22 34,22 36,27 C38,32 30,37 25,34" stroke-width="0.9"/>
+          <circle cx="28" cy="28" r="4.5" stroke-width="1"/>
+          <path d="M14,14 L108,14" stroke-width="0.6" stroke-dasharray="2 3"/>
+          <path d="M14,14 L14,108" stroke-width="0.6" stroke-dasharray="2 3"/>
         </svg>
       </div>
 
-      <div class="card-inner-frame">
-        <p class="blessing-line">CON LA BENDICIÓN DE DIOS Y NUESTRAS FAMILIAS</p>
-        <div class="fine-divider"></div>
-        <p class="invitation-lead">TENEMOS EL HONOR DE INVITARLES A CELEBRAR NUESTRA UNIÓN</p>
+      <!-- Marco Doble Interior Estilo Papelería Nupcial -->
+      <div class="postcard-inner-frame">
+        
+        <!-- 1. Encabezado -->
+        <p class="postcard-pretitle">
+          CON GRAN ILUSIÓN, INVITAMOS A NUESTRA FAMILIA Y AMIGOS A CELEBRAR NUESTRA UNIÓN EN MATRIMONIO CIVIL
+        </p>
+        <div class="postcard-fine-divider"></div>
 
-        <h1 class="couple-names">Luis <span class="ampersand">&</span> Vane</h1>
+        <!-- 2. Nombres con Carisma en Great Vibes -->
+        <h1 class="postcard-couple-title">
+          Vanessa Fernández & Luis Fonten
+        </h1>
 
-        <div class="photo-section">
-          <div class="passepartout-frame">
-            <div class="passepartout-bevel">
-              <img src="LuisVane.jpeg" alt="Luis & Vane" class="couple-img">
+        <!-- 3. Monograma Imperial "V & L" en Relieve Seco (Reemplaza la foto) -->
+        <div class="postcard-monogram-box">
+          <svg viewBox="0 0 200 64" class="postcard-monogram-svg" fill="none">
+            <!-- Guirnalda botánica izquierda -->
+            <path d="M55 32 C45 20 30 22 20 28 C25 24 35 22 45 28 M50 32 C40 38 25 38 15 30 C25 36 38 34 46 32" stroke="#B4A082" stroke-width="1.1" stroke-linecap="round"/>
+            <circle cx="18" cy="29" r="2" fill="#B4A082"/>
+            <circle cx="32" cy="23" r="1.5" fill="#B4A082"/>
+            <circle cx="42" cy="30" r="1.5" fill="#B4A082"/>
+            <!-- Guirnalda botánica derecha -->
+            <path d="M145 32 C155 20 170 22 180 28 C175 24 165 22 155 28 M150 32 C160 38 175 38 185 30 C175 36 162 34 154 32" stroke="#B4A082" stroke-width="1.1" stroke-linecap="round"/>
+            <circle cx="182" cy="29" r="2" fill="#B4A082"/>
+            <circle cx="168" cy="23" r="1.5" fill="#B4A082"/>
+            <circle cx="158" cy="30" r="1.5" fill="#B4A082"/>
+            <!-- Monograma caligráfico central V & L -->
+            <text x="82" y="44" font-family="'Great Vibes', cursive" font-size="34" fill="#24201C" text-anchor="middle">V</text>
+            <text x="100" y="40" font-family="'Cormorant Garamond', serif" font-size="20" font-style="italic" fill="#8C7A6B" text-anchor="middle">&amp;</text>
+            <text x="118" y="44" font-family="'Great Vibes', cursive" font-size="34" fill="#24201C" text-anchor="middle">L</text>
+          </svg>
+        </div>
+
+        <!-- 4. Cita sutil en cursiva -->
+        <p class="postcard-narrative-quote">
+          “Tras formalizar nuestras firmas en una ceremonia civil privada el viernes 4 de diciembre, tendremos el honor de recibirles en nuestro...”
+        </p>
+
+        <!-- 5. Evento Principal -->
+        <h2 class="postcard-event-title">BRINDIS & RECEPCIÓN DE BODAS</h2>
+
+        <!-- 6. Bloque Clásico de Fecha (con 05 grande en el centro) -->
+        <div class="postcard-date-triptych">
+          <span class="triptych-label-side">SÁBADO</span>
+          <span class="triptych-vsep">|</span>
+          <span class="triptych-center-date">05 DE DICIEMBRE</span>
+          <span class="triptych-vsep">|</span>
+          <span class="triptych-label-side">2026</span>
+        </div>
+
+        <p class="postcard-logistics-line">
+          A LAS 3:00 DE LA TARDE • URBANIZACIÓN LOMAS DEL ÁVILA, CARACAS
+        </p>
+        <p class="postcard-parking-note">
+          (Estacionamiento en calle auxiliar frente al edificio)
+        </p>
+
+        <!-- 7. Botón Visual de Google Maps (Sello editorial con borde fino) -->
+        <div class="postcard-maps-container">
+          <a 
+            id="postcard-maps-btn" 
+            href="https://maps.app.goo.gl/YEGJ85v2MsxEsgWm8" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="postcard-maps-button"
+          >
+            [ VER UBICACIÓN EXACTA EN GOOGLE MAPS ]
+          </a>
+        </div>
+
+        <!-- 8. Recuadro Delicado de Programa y Vestimenta -->
+        <div class="postcard-details-card">
+          <div class="postcard-program-box">
+            <p class="postcard-details-heading">PROGRAMA OFICIAL</p>
+            <div class="postcard-program-list">
+              <p class="postcard-program-item"><strong>3:00 PM</strong> — Recepción & Aperitivos de Bienvenida</p>
+              <p class="postcard-program-item"><strong>4:00 PM</strong> — Palabras, Anillos, Brindis & Corte de Torta</p>
+              <p class="postcard-program-item"><strong>4:30 PM</strong> — Tarde de Música, Baile & Festejo</p>
+              <p class="postcard-program-item"><strong>6:00 PM</strong> — Tertulia Íntima de Cierre</p>
             </div>
           </div>
-        </div>
 
-        <div class="civil-prelude">
-          <p class="civil-text">CEREMONIA CIVIL • 04 DE DICIEMBRE DE 2026</p>
-        </div>
+          <div class="postcard-card-inner-sep"></div>
 
-        <div class="main-date-block">
-          <div class="date-triptych">
-            <span class="triptych-month">DICIEMBRE</span>
-            <span class="triptych-separator"></span>
-            <span class="triptych-day">05</span>
-            <span class="triptych-separator"></span>
-            <span class="triptych-year">2026</span>
+          <div class="postcard-dresscode-box">
+            <p class="postcard-details-heading">CÓDIGO DE VESTIMENTA</p>
+            <p class="postcard-dresscode-text">
+              <strong>SEMI-FORMAL / CÓCTEL DE TARDE</strong><br>
+              <span class="postcard-dresscode-sub">(Reservar tonos blanco, hueso y marfil para la novia)</span>
+            </p>
           </div>
         </div>
 
-        <div class="location-summary">
-          <p class="celebration-title">CELEBRACIÓN Y COMPARTIR EN LOMAS DEL ÁVILA • CARACAS</p>
-          <p class="celebration-time">HORA: A LAS TRES DE LA TARDE (3:00 PM)</p>
+        <!-- 9. Cierre y Firma -->
+        <div class="postcard-footer-block">
+          <p class="postcard-rsvp-notice">
+            RSVP: CONFIRMAR ASISTENCIA ANTES DEL DOMINGO 22 DE NOVIEMBRE
+          </p>
+          <p class="postcard-final-signature">Vane & Luis</p>
         </div>
 
-        <div class="dresscode-box">
-          <p class="dresscode-title">DRESSCODE: ELEGANCIA FORMAL</p>
-        </div>
+      </div><!-- /.postcard-inner-frame -->
 
-        <div class="rsvp-invitation-section">
-          <h2 class="rsvp-serif-title">RSVP</h2>
-          <p class="rsvp-deadline">FAVOR CONFIRMAR ASISTENCIA ANTES DEL 20 DE NOVIEMBRE</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    </div><!-- /.postcard-canvas -->
+  </div><!-- /#printable-postcard -->
 
 
   <!-- Toast Notification System -->

@@ -1,76 +1,45 @@
 /**
  * ==========================================================================
- * LA BODA DE LUIS & VANE — LANDING PAGE VSL MOBILE-FIRST
- * Arquitectura Frontend, Lógica de Cuenta Regresiva, Colaboración & RSVP
+ * VANESSA FERNÁNDEZ & LUIS FONTEN — INVITACIÓN OFICIAL DE BODAS
+ * Lógica Frontend, Cronómetros, Presentes, RSVP Familiar & Exportación PDF
  * ==========================================================================
  */
 
 'use strict';
 
 /* ==========================================================================
-   1. OBJETO DE CONFIGURACIÓN CENTRALIZADA (EDITA AQUÍ FÁCILMENTE)
+   1. OBJETO DE CONFIGURACIÓN CENTRALIZADA
    ========================================================================== */
 const CONFIG = {
-  // --- Nombres Principales & Textos Ceremoniales ---
-  NAMES_DISPLAY: "Luis & Vane",
-  BLESSING_TEXT: "CON LA BENDICIÓN DE DIOS Y NUESTRAS FAMILIAS • CELEBRAMOS NUESTRA UNIÓN",
-  PHOTO_PATH: "LuisVane.jpeg", // Fotografía de la pareja (o "nosotros.jpg")
+  // Nombres Oficiales
+  NAMES: "Vanessa & Luis",
+  FULL_NAMES: "Vanessa Carolina Fernández Colmenares & Luis Antonio Fonten Gómez",
 
-  // --- Cuenta Regresiva (Objetivo: 05 de Diciembre de 2026 a las 3:00 PM) ---
-  COUNTDOWN_TARGET: "2026-12-05T15:00:00",
+  // Lista de candidatos para la foto principal en la web (Foto2)
+  PHOTO_CANDIDATES: ["Foto2.jpeg", "Foto2.jpg", "Foto2.png", "Foto2.webp", "LuisVane.jpeg"],
 
-  // --- Preludio Íntimo: Ceremonia Civil (04 de Diciembre de 2026) ---
-  CIVIL: {
-    fechaTexto: "CEREMONIA CIVIL • 04 DE DICIEMBRE DE 2026",
-    horaTexto: "HORA: 11:00 AM (REGISTRO CIVIL)",
-    descripcion: "La firma de nuestra unión legal con la presencia de nuestros familiares más cercanos.",
-    mostrarPreguntaEnRsvp: true // Pon false si no deseas preguntar por el Civil en el RSVP general
+  // Fechas y Cronómetros
+  WEDDING_DATE: "2026-12-05T15:00:00",  // 05 de Diciembre de 2026 a las 3:00 PM
+  RSVP_DEADLINE: "2026-11-22T23:59:59", // Cierre de Confirmaciones: 22 de Noviembre a las 23:59:59
+
+  // Ubicación Oficial en Google Maps
+  MAPS_URL: "https://maps.app.goo.gl/YEGJ85v2MsxEsgWm8",
+
+  // Datos para Presentes (Copiado táctil)
+  PRESENTES: {
+    cuentaBancaria: "01050618210618500979",
+    datosCompletosTransferencia: "BANCO MERCANTIL\nTITULAR: Luis Fonten\nC.I.: V-20.821.696\nTIPO: Ahorro\nCUENTA: 01050618210618500979",
+    pagomovilTelefono: "04126000406",
+    pagomovilCedula: "20821696",
+    binanceEmail: "ing.luisfonten@gmail.com"
   },
 
-  // --- Evento Principal: Celebración y Compartir (05 de Diciembre de 2026) ---
-  EVENT_MONTH: "DICIEMBRE",
-  EVENT_DAY: "05",
-  EVENT_YEAR: "2026",
-  EVENT_TIME: "A LAS TRES DE LA TARDE (3:00 PM)",
-  EVENT_PLACE: "LOMAS DEL ÁVILA • CARACAS",
+  // Webhook de Google Apps Script Oficial de Luis
+  GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbznKYQzW-sI_AU4ir4fZcRO0bQX1d2hqdHw0ylonOi9E89URUfdzjC7ZbAggJBLa4VJ/exec",
 
-  // --- Ubicación & Navegación ---
-  GOOGLE_MAPS_URL: "https://maps.google.com/?q=Lomas+del+Avila+Caracas+Venezuela",
-
-  // --- Código de Vestimenta (Dresscode) ---
-  DRESSCODE: {
-    titulo: "DRESSCODE",
-    subtitulo: "ELEGANCIA FORMAL",
-    mensaje: "Queremos que luzcan elegantes y cómodos para celebrar este día junto a nosotros.",
-    // Paleta de colores sugerida: puedes agregar o cambiar los colores aquí
-    paletaColores: [
-      { nombre: "Azul Medianoche", hex: "#1D2A44" },
-      { nombre: "Verde Salvia", hex: "#68785A" },
-      { nombre: "Champagne / Marfil", hex: "#EAE4D7" },
-      { nombre: "Terracota Cálido", hex: "#B86B53" },
-      { nombre: "Rosa Palo", hex: "#D9A8A0" }
-    ]
-  },
-
-  // --- Apartado de Colaboración / Presente (NUEVO) ---
-  COLABORACION: {
-    titulo: "DETALLE DE CARIÑO & COLABORACIÓN",
-    mensaje: "Su presencia y compañía en este día tan especial es nuestro mejor regalo. Si desean tener un detalle o colaborar con el inicio de nuestra vida juntos, hemos dispuesto este espacio con mucho cariño. (Detalles próximamente)",
-    mostrarDatosExtra: true, // Pon true para habilitar el bloque desplegable con datos bancarios
-    datosBancarios: "BANCO: Mercantil\nTITULAR: Luis & Vanessa\nCUENTA: 0105-XXXX-XX-XXXXXXXXXX\nPAGO MÓVIL: 0414-XXXXXXX / CI: V-XXXXXXXX\nZELLE / OTROS: consultar con los novios."
-  },
-
-  // --- Fecha Límite de Confirmación (RSVP) ---
-  RSVP_DEADLINE_TEXT: "FAVOR CONFIRMAR ASISTENCIA ANTES DEL 20 DE NOVIEMBRE",
-
-  // --- Conexión con Google Apps Script (Backend de Hojas de Cálculo) ---
-  // Pega aquí la URL Web App generada desde google-apps-script-backend.gs
-  // Si se deja vacío (""), funcionará en Modo Simulación Local respaldando en localStorage.
-  GOOGLE_SCRIPT_URL: "",
-
-  // --- Límites Operativos ---
-  MAX_COMPANIONS: 8,
-  STORAGE_KEY: "boda_luis_vane_rsvp_v2"
+  // Límites y Almacenamiento
+  MAX_FAMILIARES: 10,
+  STORAGE_KEY: "boda_vanessa_luis_rsvp_v4"
 };
 
 
@@ -78,10 +47,12 @@ const CONFIG = {
    2. ESTADO GLOBAL DE LA APLICACIÓN
    ========================================================================== */
 const AppState = {
-  companionCount: 0,
+  familiarCount: 0,
   isSubmitting: false,
   savedRsvp: null,
-  countdownInterval: null
+  weddingTimerInterval: null,
+  rsvpTimerInterval: null,
+  photoCandidateIndex: 0
 };
 
 
@@ -91,7 +62,8 @@ const AppState = {
 /**
  * Sanitiza cualquier texto de entrada:
  * 1. Elimina etiquetas HTML y caracteres no imprimibles.
- * 2. Si el texto inicia con fórmulas (=, +, -, @, \t, \r), neutraliza anteponiendo un apóstrofe (').
+ * 2. Si el texto inicia con signos que Excel o Google Sheets interpretan como fórmulas
+ *    (=, +, -, @, \t, \r), lo neutraliza anteponiendo un apóstrofe (').
  */
 function sanitizeInput(input) {
   if (input === null || input === undefined) return "";
@@ -107,153 +79,83 @@ function sanitizeInput(input) {
 
 
 /* ==========================================================================
-   4. INICIALIZACIÓN DE LA PÁGINA DESDE CONFIG
+   4. INICIALIZACIÓN DE LA PÁGINA
    ========================================================================== */
-function initializeFromConfig() {
-  // Sección 1: Hero
-  const blessingEl = document.getElementById("hero-blessing-text");
-  if (blessingEl) blessingEl.textContent = CONFIG.BLESSING_TEXT;
+function initializePage() {
+  // Carga automática de Foto2 con fallback progresivo
+  setupPhotoCandidateSequence();
 
-  const monthEl = document.getElementById("hero-month-text");
-  if (monthEl) monthEl.textContent = CONFIG.EVENT_MONTH;
-
-  const dayEl = document.getElementById("hero-day-text");
-  if (dayEl) dayEl.textContent = CONFIG.EVENT_DAY;
-
-  const yearEl = document.getElementById("hero-year-text");
-  if (yearEl) yearEl.textContent = CONFIG.EVENT_YEAR;
-
-  const locSubEl = document.getElementById("hero-location-sub");
-  if (locSubEl) locSubEl.textContent = `${CONFIG.EVENT_PLACE}, VENEZUELA`;
-
-  // Sección 2: Dos Fechas
-  const civilDescEl = document.getElementById("civil-card-desc");
-  if (civilDescEl) civilDescEl.textContent = CONFIG.CIVIL.descripcion;
-
-  const civilTimeEl = document.getElementById("civil-card-time");
-  if (civilTimeEl) civilTimeEl.textContent = CONFIG.CIVIL.horaTexto;
-
-  const mainTimeEl = document.getElementById("main-card-time");
-  if (mainTimeEl) mainTimeEl.textContent = CONFIG.EVENT_TIME;
-
-  const mainPlaceEl = document.getElementById("main-card-place");
-  if (mainPlaceEl) mainPlaceEl.textContent = CONFIG.EVENT_PLACE;
-
-  // Sección 3: Ubicación y Dresscode
+  // Enlace a Google Maps
   const mapsBtn = document.getElementById("maps-link-btn");
-  if (mapsBtn && CONFIG.GOOGLE_MAPS_URL) mapsBtn.href = CONFIG.GOOGLE_MAPS_URL;
-
-  const dresscodeTitle = document.getElementById("dresscode-title");
-  if (dresscodeTitle) dresscodeTitle.textContent = CONFIG.DRESSCODE.titulo;
-
-  const dresscodeSub = document.getElementById("dresscode-subtitle");
-  if (dresscodeSub) dresscodeSub.textContent = CONFIG.DRESSCODE.subtitulo;
-
-  const dresscodeNote = document.getElementById("dresscode-note");
-  if (dresscodeNote) dresscodeNote.textContent = CONFIG.DRESSCODE.mensaje;
-
-  renderPaletteDots();
-
-  // Sección 4: Colaboración / Presente
-  const colabTitle = document.getElementById("colaboracion-title");
-  if (colabTitle) colabTitle.textContent = CONFIG.COLABORACION.titulo;
-
-  const colabMsg = document.getElementById("colaboracion-message");
-  if (colabMsg) colabMsg.textContent = CONFIG.COLABORACION.mensaje;
-
-  const colabModule = document.getElementById("colaboracion-extra-module");
-  const colabInfoBox = document.getElementById("colaboracion-info-box");
-  if (colabModule && colabInfoBox) {
-    if (CONFIG.COLABORACION.mostrarDatosExtra) {
-      colabModule.style.display = "block";
-      // Formato con saltos de línea legibles
-      colabInfoBox.innerHTML = CONFIG.COLABORACION.datosBancarios.replace(/\n/g, "<br>");
-    } else {
-      colabModule.style.display = "none";
-    }
+  if (mapsBtn && CONFIG.MAPS_URL) {
+    mapsBtn.href = CONFIG.MAPS_URL;
   }
 
-  // Sección 5: RSVP
-  const rsvpDeadline = document.getElementById("rsvp-deadline-text");
-  if (rsvpDeadline) rsvpDeadline.textContent = CONFIG.RSVP_DEADLINE_TEXT;
+  // Iniciar ambos cronómetros independientes
+  startWeddingCountdown();
+  startRsvpCountdown();
 
-  const civilOptionGroup = document.getElementById("civil-option-group");
-  if (civilOptionGroup && !CONFIG.CIVIL.mostrarPreguntaEnRsvp) {
-    civilOptionGroup.style.display = "none";
-  }
-
-  // Fotografía con fallback a monograma
-  setupPhotoWithFallback();
-
-  // Iniciar Cuenta Regresiva
-  startCountdownTimer();
-
-  // Configurar Sticky Mobile CTA con IntersectionObserver
+  // Configurar Sticky Mobile CTA sin franja de fondo y con auto-ocultación precisa
   setupStickyMobileCta();
 
-  // Comprobar confirmaciones previas en este navegador
+  // Configurar eventos de presentes y copiado
+  setupPresentsEvents();
+
+  // Revisar si existe confirmación previa guardada
   checkExistingRsvp();
 }
 
 
 /**
- * Renderiza dinámicamente las bolitas de colores de la paleta sugerida
+ * Carga progresiva de Foto2 (.jpeg, .jpg, .png, .webp) con fallback a monograma
  */
-function renderPaletteDots() {
-  const container = document.getElementById("palette-dots-container");
-  if (!container || !CONFIG.DRESSCODE.paletaColores) return;
-
-  container.innerHTML = "";
-  CONFIG.DRESSCODE.paletaColores.forEach(color => {
-    const dot = document.createElement("span");
-    dot.className = "palette-dot";
-    dot.style.backgroundColor = color.hex;
-    dot.title = `${color.nombre} (${color.hex})`;
-    dot.setAttribute("aria-label", color.nombre);
-    container.appendChild(dot);
-  });
-}
-
-
-/**
- * Manejo de la foto con monograma caligráfico en relieve si no existe
- */
-function setupPhotoWithFallback() {
+function setupPhotoCandidateSequence() {
   const photoImg = document.getElementById("couple-photo");
   const monogram = document.getElementById("monogram-fallback");
   if (!photoImg || !monogram) return;
 
-  photoImg.src = CONFIG.PHOTO_PATH;
-
-  photoImg.onerror = function() {
-    if (photoImg.src.indexOf("nosotros.jpg") === -1 && CONFIG.PHOTO_PATH !== "nosotros.jpg") {
-      photoImg.src = "nosotros.jpg";
-      photoImg.onerror = function() {
-        photoImg.style.display = "none";
-        monogram.style.display = "flex";
-      };
+  function tryNextCandidate() {
+    if (AppState.photoCandidateIndex < CONFIG.PHOTO_CANDIDATES.length) {
+      const nextSrc = CONFIG.PHOTO_CANDIDATES[AppState.photoCandidateIndex];
+      AppState.photoCandidateIndex++;
+      photoImg.src = nextSrc;
     } else {
+      // Si ninguno cargó, mostrar monograma caligráfico en relieve
       photoImg.style.display = "none";
       monogram.style.display = "flex";
     }
+  }
+
+  photoImg.onerror = function() {
+    tryNextCandidate();
   };
+
+  photoImg.onload = function() {
+    photoImg.style.display = "block";
+    monogram.style.display = "none";
+  };
+
+  tryNextCandidate();
 }
 
 
 /* ==========================================================================
-   5. CONTADOR REGRESIVO EN TIEMPO REAL (DÍAS, HORAS, MIN, SEG)
+   5. CONTADORES REGRESIVOS (BODA Y CIERRE DE RSVP)
    ========================================================================== */
-function startCountdownTimer() {
-  const targetDate = new Date(CONFIG.COUNTDOWN_TARGET).getTime();
+/**
+ * Cronómetro #1: Hacia la Boda (05 de Diciembre de 2026 a las 15:00:00)
+ */
+function startWeddingCountdown() {
+  const targetDate = new Date(CONFIG.WEDDING_DATE).getTime();
 
   function update() {
     const now = new Date().getTime();
     const distance = targetDate - now;
 
-    const daysEl = document.getElementById("countdown-days");
-    const hoursEl = document.getElementById("countdown-hours");
-    const minutesEl = document.getElementById("countdown-minutes");
-    const secondsEl = document.getElementById("countdown-seconds");
+    const daysEl = document.getElementById("wedding-countdown-days");
+    const hoursEl = document.getElementById("wedding-countdown-hours");
+    const minutesEl = document.getElementById("wedding-countdown-minutes");
+    const secondsEl = document.getElementById("wedding-countdown-seconds");
 
     if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
@@ -262,7 +164,7 @@ function startCountdownTimer() {
       hoursEl.textContent = "00";
       minutesEl.textContent = "00";
       secondsEl.textContent = "00";
-      if (AppState.countdownInterval) clearInterval(AppState.countdownInterval);
+      if (AppState.weddingTimerInterval) clearInterval(AppState.weddingTimerInterval);
       return;
     }
 
@@ -278,97 +180,175 @@ function startCountdownTimer() {
   }
 
   update();
-  AppState.countdownInterval = setInterval(update, 1000);
+  AppState.weddingTimerInterval = setInterval(update, 1000);
+}
+
+/**
+ * Cronómetro #2: Hacia el Cierre de RSVP (22 de Noviembre de 2026 a las 23:59:59)
+ */
+function startRsvpCountdown() {
+  const targetDate = new Date(CONFIG.RSVP_DEADLINE).getTime();
+
+  function update() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const daysEl = document.getElementById("rsvp-countdown-days");
+    const hoursEl = document.getElementById("rsvp-countdown-hours");
+    const minutesEl = document.getElementById("rsvp-countdown-minutes");
+    const secondsEl = document.getElementById("rsvp-countdown-seconds");
+
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    if (distance <= 0) {
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minutesEl.textContent = "00";
+      secondsEl.textContent = "00";
+      if (AppState.rsvpTimerInterval) clearInterval(AppState.rsvpTimerInterval);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }
+
+  update();
+  AppState.rsvpTimerInterval = setInterval(update, 1000);
 }
 
 
 /* ==========================================================================
-   6. BARRA FLOTANTE INFERIOR EN MÓVIL (STICKY CTA CON INTERSECTION OBSERVER)
+   6. BOTÓN FLOTANTE PERMANENTE (CTA FLOTANTE)
+   Se fija al centro inferior y se oculta automáticamente al llegar a #confirmar
    ========================================================================== */
 function setupStickyMobileCta() {
   const stickyBar = document.getElementById("sticky-mobile-cta");
-  const rsvpSection = document.getElementById("rsvp-section");
+  const rsvpSection = document.getElementById("confirmar") || document.getElementById("rsvp-section");
+  const footerElement = document.getElementById("main-footer");
 
-  if (!stickyBar || !rsvpSection) return;
+  if (!stickyBar) return;
 
-  // Usa IntersectionObserver para ocultar la barra flotante cuando la sección RSVP esté a la vista
+  function hideSticky() {
+    stickyBar.classList.add("is-hidden");
+  }
+
+  function showSticky() {
+    stickyBar.classList.remove("is-hidden");
+  }
+
+  // 1. IntersectionObserver para la sección RSVP (#confirmar) y el Footer
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => {
+      let shouldHide = false;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // El usuario está viendo la sección RSVP: ocultar barra flotante
-          stickyBar.classList.add("is-hidden");
-        } else {
-          // El usuario está arriba: mostrar barra flotante
-          stickyBar.classList.remove("is-hidden");
+          shouldHide = true;
         }
       });
+
+      if (shouldHide) {
+        hideSticky();
+      } else {
+        showSticky();
+      }
     }, {
       root: null,
-      threshold: 0.15
+      threshold: 0.05
     });
 
-    observer.observe(rsvpSection);
+    if (rsvpSection) observer.observe(rsvpSection);
+    if (footerElement) observer.observe(footerElement);
   }
+
+  // 2. Comprobación de respaldo en evento scroll al final de la página
+  window.addEventListener("scroll", () => {
+    const scrollPos = window.innerHeight + window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // Si el usuario está cerca del final de la página, ocultar
+    if (scrollPos >= documentHeight - 140) {
+      hideSticky();
+    }
+  }, { passive: true });
 }
 
 
 /* ==========================================================================
-   7. INTERACCIÓN DE COLABORACIÓN / COPIAR DATOS
+   7. MÓDULO DE PRESENTES (COPIADO TÁCTIL)
    ========================================================================== */
-function setupColaboracionEvents() {
-  const toggleBtn = document.getElementById("btn-toggle-colaboracion");
-  const content = document.getElementById("colaboracion-details-content");
-  const toggleText = document.getElementById("colaboracion-toggle-text");
-  const copyBtn = document.getElementById("btn-copy-colaboracion");
-  const copyBtnText = document.getElementById("copy-btn-text");
+function setupPresentsEvents() {
+  const toggleBtn = document.getElementById("btn-toggle-presentes");
+  const optionsContent = document.getElementById("presents-options-content");
+  const toggleText = document.getElementById("presents-toggle-text");
 
-  if (toggleBtn && content) {
+  if (toggleBtn && optionsContent) {
     toggleBtn.addEventListener("click", () => {
       const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
       toggleBtn.setAttribute("aria-expanded", !isExpanded);
       if (isExpanded) {
-        content.style.display = "none";
-        if (toggleText) toggleText.textContent = "Ver información de colaboración";
+        optionsContent.style.display = "none";
+        if (toggleText) toggleText.textContent = "VER OPCIONES PARA PRESENTES";
       } else {
-        content.style.display = "block";
-        if (toggleText) toggleText.textContent = "Ocultar información de colaboración";
+        optionsContent.style.display = "block";
+        if (toggleText) toggleText.textContent = "OCULTAR OPCIONES PARA PRESENTES";
       }
     });
   }
 
-  if (copyBtn) {
-    copyBtn.addEventListener("click", () => {
-      const textToCopy = CONFIG.COLABORACION.datosBancarios;
-      
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(textToCopy).then(onCopySuccess).catch(fallbackCopy);
-      } else {
-        fallbackCopy();
-      }
+  // Copiar Cuenta
+  bindCopyButton("copy-cuenta-btn", CONFIG.PRESENTES.cuentaBancaria, "¡Número de cuenta copiado!");
 
-      function onCopySuccess() {
-        if (copyBtnText) copyBtnText.textContent = "¡DATOS COPIADOS AL PORTAPAPELES!";
-        showToast("¡Datos de colaboración copiados con éxito!", "success");
-        setTimeout(() => {
-          if (copyBtnText) copyBtnText.textContent = "COPIAR DATOS DE COLABORACIÓN";
-        }, 3000);
-      }
+  // Copiar Datos Completos de Transferencia
+  bindCopyButton("copy-transferencia-completa-btn", CONFIG.PRESENTES.datosCompletosTransferencia, "¡Datos de transferencia copiados!");
 
-      function fallbackCopy() {
-        const tempTextarea = document.createElement("textarea");
-        tempTextarea.value = textToCopy;
-        document.body.appendChild(tempTextarea);
-        tempTextarea.select();
-        try {
-          document.execCommand("copy");
-          onCopySuccess();
-        } catch (err) {
-          showToast("No se pudo copiar automáticamente. Por favor selecciónalo.", "normal");
-        }
-        document.body.removeChild(tempTextarea);
-      }
+  // Copiar Teléfono Pago Móvil
+  bindCopyButton("copy-pagomovil-tel-btn", CONFIG.PRESENTES.pagomovilTelefono, "¡Teléfono de pago móvil copiado!");
+
+  // Copiar Cédula Pago Móvil
+  bindCopyButton("copy-pagomovil-ci-btn", CONFIG.PRESENTES.pagomovilCedula, "¡Cédula copiada!");
+
+  // Copiar Correo Binance
+  bindCopyButton("copy-binance-email-btn", CONFIG.PRESENTES.binanceEmail, "¡Correo Binance copiado!");
+}
+
+function bindCopyButton(btnId, textToCopy, successMsg) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    copyToClipboard(textToCopy, () => {
+      showToast(successMsg, "success");
     });
+  });
+}
+
+function copyToClipboard(text, onSuccess) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+  } else {
+    fallback();
+  }
+
+  function fallback() {
+    const tempInput = document.createElement("textarea");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    try {
+      document.execCommand("copy");
+      onSuccess();
+    } catch (e) {
+      showToast("Por favor copia el texto manualmente.", "normal");
+    }
+    document.body.removeChild(tempInput);
   }
 }
 
@@ -396,113 +376,64 @@ function showToast(message, type = "normal") {
 
 
 /* ==========================================================================
-   9. GESTIÓN DINÁMICA DE ACOMPAÑANTES Y FAMILIARES
+   9. GESTIÓN DINÁMICA DE FAMILIARES INVITADOS (PASO 3)
    ========================================================================== */
-function addCompanionField(initialData = null) {
-  if (AppState.companionCount >= CONFIG.MAX_COMPANIONS) {
-    showToast(`Se ha alcanzado el límite máximo de ${CONFIG.MAX_COMPANIONS} acompañantes.`);
+function addFamiliarField(initialValue = "") {
+  if (AppState.familiarCount >= CONFIG.MAX_FAMILIARES) {
+    showToast(`Se ha alcanzado el límite máximo de ${CONFIG.MAX_FAMILIARES} familiares.`);
     return;
   }
 
-  AppState.companionCount++;
-  const index = AppState.companionCount;
-  const container = document.getElementById("companions-container");
+  AppState.familiarCount++;
+  const num = AppState.familiarCount + 1; // El invitado principal es #1, familiares empiezan en #2
+  const container = document.getElementById("lista-familiares");
   if (!container) return;
 
   const card = document.createElement("div");
-  card.className = "companion-card";
-  card.id = `companion-row-${index}`;
-
-  const showCivil = CONFIG.CIVIL.mostrarPreguntaEnRsvp;
+  card.className = "familiar-row-card";
+  card.id = `familiar-row-${num}`;
 
   card.innerHTML = `
-    <div class="companion-header">
-      <span class="companion-number">Acompañante / Familiar #${index}</span>
-      <button type="button" class="btn-remove-companion" data-id="${index}" aria-label="Eliminar acompañante">
+    <div class="familiar-row-header">
+      <span class="familiar-row-label">Familiar Invitado #${num}</span>
+      <button type="button" class="btn-remove-familiar" aria-label="Eliminar familiar invitado">
         ✕ Quitar
       </button>
     </div>
-    
-    <div class="form-group">
-      <label class="form-label" for="comp-nombre-${index}">
-        Nombre y Apellido del Acompañante <span class="required">*</span>
-      </label>
+    <div class="form-group" style="margin-bottom: 0;">
       <input 
         type="text" 
-        id="comp-nombre-${index}" 
-        name="comp_nombre_${index}" 
-        class="form-input comp-input-name" 
-        placeholder="Ej. Nombre completo del familiar" 
+        class="form-input familiar-input-name" 
+        placeholder="Nombre y Apellido del Familiar Invitado #${num}" 
         required 
         maxlength="90"
-        value="${initialData && initialData.nombre ? initialData.nombre : ''}"
+        value="${initialValue}"
       >
-      <span class="field-error" id="error-comp-nombre-${index}"></span>
-    </div>
-
-    <div class="form-group">
-      <span class="form-label">¿Asiste a la Celebración del 5 de Diciembre?</span>
-      <div class="radio-pill-group">
-        <label class="radio-pill">
-          <input type="radio" name="comp_asiste_5_${index}" value="SI" ${!initialData || initialData.asiste5Dic === 'SI' ? 'checked' : ''}>
-          <span>Sí Asiste</span>
-        </label>
-        <label class="radio-pill">
-          <input type="radio" name="comp_asiste_5_${index}" value="NO" ${initialData && initialData.asiste5Dic === 'NO' ? 'checked' : ''}>
-          <span>No Asiste</span>
-        </label>
-      </div>
-    </div>
-
-    ${showCivil ? `
-      <div class="form-group">
-        <span class="form-label">¿Asiste a la Ceremonia Civil (4 Dic)?</span>
-        <div class="radio-pill-group">
-          <label class="radio-pill">
-            <input type="radio" name="comp_asiste_4_${index}" value="SI" ${initialData && initialData.asiste4Dic === 'SI' ? 'checked' : ''}>
-            <span>Sí al Civil</span>
-          </label>
-          <label class="radio-pill">
-            <input type="radio" name="comp_asiste_4_${index}" value="NO" ${!initialData || initialData.asiste4Dic === 'NO' ? 'checked' : ''}>
-            <span>No al Civil</span>
-          </label>
-        </div>
-      </div>
-    ` : ''}
-
-    <div class="form-group">
-      <label class="form-label" for="comp-restriccion-${index}">
-        Preferencia o Restricción Alimentaria
-      </label>
-      <select id="comp-restriccion-${index}" name="comp_restriccion_${index}" class="form-select comp-select-restriccion">
-        <option value="Ninguna">Ninguna (Menú tradicional)</option>
-        <option value="Vegetariano">Vegetariano</option>
-        <option value="Vegano">Vegano</option>
-        <option value="Sin Gluten">Sin Gluten (Celíaco)</option>
-        <option value="Alergia">Alergia específica</option>
-      </select>
+      <span class="field-error"></span>
     </div>
   `;
 
   container.appendChild(card);
 
-  const removeBtn = card.querySelector(".btn-remove-companion");
+  const removeBtn = card.querySelector(".btn-remove-familiar");
   removeBtn.addEventListener("click", () => {
     card.remove();
-    reindexCompanions();
+    reindexFamiliares();
   });
 }
 
-function reindexCompanions() {
-  const container = document.getElementById("companions-container");
+function reindexFamiliares() {
+  const container = document.getElementById("lista-familiares");
   if (!container) return;
-  const cards = container.querySelectorAll(".companion-card");
-  AppState.companionCount = cards.length;
+  const cards = container.querySelectorAll(".familiar-row-card");
+  AppState.familiarCount = cards.length;
 
   cards.forEach((card, idx) => {
-    const num = idx + 1;
-    const title = card.querySelector(".companion-number");
-    if (title) title.textContent = `Acompañante / Familiar #${num}`;
+    const num = idx + 2;
+    const label = card.querySelector(".familiar-row-label");
+    const input = card.querySelector(".familiar-input-name");
+    if (label) label.textContent = `Familiar Invitado #${num}`;
+    if (input) input.placeholder = `Nombre y Apellido del Familiar Invitado #${num}`;
   });
 }
 
@@ -531,25 +462,25 @@ function validateForm() {
   const cleanTel = telInput.value.replace(/[^0-9+]/g, "");
   if (!cleanTel || cleanTel.length < 7) {
     telInput.classList.add("is-invalid");
-    if (errorTel) errorTel.textContent = "Ingresa un número de teléfono o WhatsApp válido.";
+    if (errorTel) errorTel.textContent = "Ingresa un número de contacto o WhatsApp válido.";
     isValid = false;
   } else {
     telInput.classList.remove("is-invalid");
     if (errorTel) errorTel.textContent = "";
   }
 
-  // 3. Validar Acompañantes
-  const compCards = document.querySelectorAll(".companion-card");
-  compCards.forEach((card) => {
-    const compInput = card.querySelector(".comp-input-name");
-    const errorComp = card.querySelector(".field-error");
-    if (compInput && !compInput.value.trim()) {
-      compInput.classList.add("is-invalid");
-      if (errorComp) errorComp.textContent = "Indica el nombre de este acompañante o quita la fila.";
+  // 3. Validar Familiares adicionales
+  const familiarCards = document.querySelectorAll(".familiar-row-card");
+  familiarCards.forEach((card) => {
+    const input = card.querySelector(".familiar-input-name");
+    const error = card.querySelector(".field-error");
+    if (input && !input.value.trim()) {
+      input.classList.add("is-invalid");
+      if (error) error.textContent = "Indica el nombre de este familiar o presiona ✕ Quitar.";
       isValid = false;
-    } else if (compInput) {
-      compInput.classList.remove("is-invalid");
-      if (errorComp) errorComp.textContent = "";
+    } else if (input) {
+      input.classList.remove("is-invalid");
+      if (error) error.textContent = "";
     }
   });
 
@@ -559,63 +490,58 @@ function validateForm() {
 function buildPayloadFromForm() {
   const nombrePrincipal = sanitizeInput(document.getElementById("nombre-principal").value);
   const telefonoPrincipal = sanitizeInput(document.getElementById("telefono-principal").value);
-  
-  const asiste5Principal = document.querySelector('input[name="asiste_5_dic_principal"]:checked')?.value || "SI";
-  const asiste4Principal = document.querySelector('input[name="asiste_4_dic_principal"]:checked')?.value || "NO";
-
-  const restriccionSelect = document.getElementById("restriccion-principal").value;
-  let restriccionPrincipal = restriccionSelect;
-  if (restriccionSelect === "Alergia") {
-    const otraAlergia = sanitizeInput(document.getElementById("otra-alergia-principal").value);
-    restriccionPrincipal = otraAlergia ? `Alergia: ${otraAlergia}` : "Alergia no especificada";
-  }
-
+  const radioVal = document.querySelector('input[name="asistencia_principal"]:checked')?.value || "Sí asistirá";
+  const asistencia = radioVal.includes("No") ? "No podré asistir" : "Sí asistiré";
   const mensajeNovios = sanitizeInput(document.getElementById("mensaje-novios").value);
 
-  const now = new Date();
-  const dateStamp = now.toISOString().slice(0, 10).replace(/-/g, "");
-  const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
-  const familyId = `FAM-${dateStamp}-${randomSuffix}`;
-  const timestampIso = now.toISOString();
+  const groupId = "FAM-" + Date.now();
+  const timestampIso = new Date().toISOString();
 
-  const invitados = [
-    {
-      rol: "Principal",
-      nombre: nombrePrincipal,
-      telefono: telefonoPrincipal,
-      asiste5Dic: asiste5Principal,
-      asiste4Dic: asiste4Principal,
-      restriccion: restriccionPrincipal
-    }
-  ];
-
-  const compCards = document.querySelectorAll(".companion-card");
-  compCards.forEach((card, idx) => {
-    const num = idx + 1;
-    const compName = sanitizeInput(card.querySelector(".comp-input-name")?.value);
-    const compAsiste5 = card.querySelector(`input[name="comp_asiste_5_${num}"]:checked`)?.value || "SI";
-    const compAsiste4 = card.querySelector(`input[name="comp_asiste_4_${num}"]:checked`)?.value || "NO";
-    const compRestriccion = card.querySelector(".comp-select-restriccion")?.value || "Ninguna";
-
-    if (compName) {
-      invitados.push({
-        rol: "Acompañante",
-        nombre: compName,
-        telefono: telefonoPrincipal,
-        asiste5Dic: compAsiste5,
-        asiste4Dic: compAsiste4,
-        restriccion: compRestriccion
-      });
+  // Arreglo de strings con los nombres y apellidos de cada familiar adicional
+  const familiares = [];
+  const familiarCards = document.querySelectorAll(".familiar-row-card");
+  familiarCards.forEach((card) => {
+    const famName = sanitizeInput(card.querySelector(".familiar-input-name")?.value);
+    if (famName) {
+      familiares.push(famName);
     }
   });
 
+  // Estructura de invitados para compatibilidad y visualización en el frontend
+  const invitados = [
+    {
+      numeroEnGrupo: 1,
+      tipo: "Principal",
+      nombre: nombrePrincipal,
+      asistencia: asistencia
+    }
+  ];
+
+  familiares.forEach((famName, idx) => {
+    invitados.push({
+      numeroEnGrupo: idx + 2,
+      tipo: "Familiar Invitado",
+      nombre: famName,
+      asistencia: asistencia
+    });
+  });
+
   return {
-    idGrupoFamiliar: familyId,
+    // Campos exactos solicitados:
+    idGrupo: groupId,
+    asistencia: asistencia,
+    nombrePrincipal: nombrePrincipal,
+    telefono: telefonoPrincipal,
+    mensaje: mensajeNovios,
+    familiares: familiares,
+
+    // Campos de compatibilidad con backend y resumen local:
+    idGrupoFamiliar: groupId,
     fechaRegistro: timestampIso,
     confirmadoPor: nombrePrincipal,
     telefonoContacto: telefonoPrincipal,
     mensajeNovios: mensajeNovios,
-    totalPersonas: invitados.length,
+    totalPersonas: 1 + familiares.length,
     invitados: invitados
   };
 }
@@ -626,7 +552,7 @@ async function handleRsvpSubmit(e) {
   if (AppState.isSubmitting) return;
 
   if (!validateForm()) {
-    showToast("Por favor revisa los campos señalados en rojo.", "error");
+    showToast("Por favor completa los campos señalados en rojo.", "error");
     return;
   }
 
@@ -644,8 +570,9 @@ async function handleRsvpSubmit(e) {
       await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
+        redirect: "follow",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain;charset=utf-8"
         },
         body: JSON.stringify(payload)
       });
@@ -680,7 +607,7 @@ function setSubmitLoadingState(loading) {
   if (loading) {
     btn.disabled = true;
     if (spinner) spinner.style.display = "inline-block";
-    if (btnText) btnText.textContent = "ENVIANDO...";
+    if (btnText) btnText.textContent = "ENVIANDO CONFIRMACIÓN...";
   } else {
     btn.disabled = false;
     if (spinner) spinner.style.display = "none";
@@ -695,23 +622,32 @@ function displaySuccessView(payload) {
 
   if (!formEl || !successCard || !summaryBox) return;
 
-  let guestsListHtml = payload.invitados.map(inv => {
-    const civilTag = CONFIG.CIVIL.mostrarPreguntaEnRsvp && inv.asiste4Dic === "SI" 
-      ? " <small style='color: #68785A;'>(Civil + Celebración)</small>" 
-      : "";
-    const statusText = inv.asiste5Dic === "SI" ? "✓ Asiste" : "✕ No asiste";
-    return `<li><strong>${inv.nombre}</strong>: ${statusText}${civilTag}</li>`;
-  }).join("");
+  const total = payload.totalPersonas || (1 + (payload.familiares ? payload.familiares.length : 0));
+  let guestsListHtml = "";
+  if (payload.invitados && payload.invitados.length > 0) {
+    guestsListHtml = payload.invitados.map(inv => {
+      const badge = inv.tipo === "Principal" ? "(Titular)" : "(Familiar)";
+      return `<li><strong>${inv.nombre}</strong> <small style="color: #46543A;">${badge}</small> — ${inv.asistencia}</li>`;
+    }).join("");
+  } else {
+    guestsListHtml = `<li><strong>${payload.nombrePrincipal}</strong> <small style="color: #46543A;">(Titular)</small> — ${payload.asistencia}</li>`;
+    if (payload.familiares) {
+      payload.familiares.forEach(fam => {
+        guestsListHtml += `<li><strong>${fam}</strong> <small style="color: #46543A;">(Familiar)</small> — ${payload.asistencia}</li>`;
+      });
+    }
+  }
 
   summaryBox.innerHTML = `
-    <p><strong>Comprobante Familiar:</strong> ${payload.idGrupoFamiliar}</p>
-    <p><strong>Registrado por:</strong> ${payload.confirmadoPor}</p>
-    <p><strong>Contacto:</strong> ${payload.telefonoContacto}</p>
-    <p style="margin-top: 10px;"><strong>Detalle de Asistencia (${payload.totalPersonas} ${payload.totalPersonas === 1 ? 'persona' : 'personas'}):</strong></p>
+    <p><strong>Comprobante Familiar:</strong> ${payload.idGrupo || payload.idGrupoFamiliar}</p>
+    <p><strong>Registrado por:</strong> ${payload.nombrePrincipal || payload.confirmadoPor}</p>
+    <p><strong>Teléfono / WhatsApp:</strong> ${payload.telefono || payload.telefonoContacto}</p>
+    <p><strong>Estado de Asistencia:</strong> ${payload.asistencia}</p>
+    <p style="margin-top: 10px;"><strong>Personas contempladas en este grupo (${total}):</strong></p>
     <ul style="margin-left: 20px; margin-top: 6px;">
       ${guestsListHtml}
     </ul>
-    ${payload.mensajeNovios ? `<p style="margin-top: 10px; font-style: italic;">"${payload.mensajeNovios}"</p>` : ""}
+    ${(payload.mensaje || payload.mensajeNovios) ? `<p style="margin-top: 10px; font-style: italic;">"${payload.mensaje || payload.mensajeNovios}"</p>` : ""}
   `;
 
   formEl.style.display = "none";
@@ -747,73 +683,113 @@ function updateLocalStatusBanner(data) {
   if (!banner || !summaryText) return;
 
   const total = data.totalPersonas || data.invitados?.length || 1;
-  const countDesc = total === 1 ? "1 invitado registrado" : `${total} invitados registrados`;
+  const countDesc = total === 1 ? "1 invitado registrado" : `${total} personas registradas`;
   summaryText.textContent = `${data.confirmadoPor} (${countDesc}) • Ref: ${data.idGrupoFamiliar}`;
   banner.style.display = "flex";
 }
 
 
 /* ==========================================================================
-   11. DESCARGA EN PDF DE ALTA PRECISIÓN (html2pdf.js)
+   11. DESCARGA EN PDF OFICIAL ESTILO POSTAL ARTÍSTICA (HTML2CANVAS + JSPDF)
+   Renderiza el contenedor #printable-postcard (alta resolución con tipografías
+   caligráficas Great Vibes, rosas en relieve y monograma botánico V&L),
+   insertándolo en 1 sola página A4 e incrustando el enlace interactivo
+   a Google Maps con doc.link().
    ========================================================================== */
-function handleDownloadPdf() {
-  const postcardElement = document.getElementById("printable-postcard");
+async function generateVectorialPdf() {
   const downloadBtn = document.getElementById("download-pdf-btn");
+  const heroDownloadBtn = document.getElementById("hero-download-pdf-btn");
   const btnText = document.getElementById("download-pdf-text");
 
-  if (!postcardElement) return;
+  if (btnText) btnText.textContent = "GENERANDO POSTAL PDF...";
+  if (downloadBtn) downloadBtn.style.opacity = "0.7";
+  if (heroDownloadBtn) heroDownloadBtn.style.opacity = "0.7";
 
-  if (typeof html2pdf === "undefined") {
+  const postcard = document.getElementById("printable-postcard");
+  if (!postcard) {
+    console.warn("Elemento #printable-postcard no encontrado. Abriendo vista de impresión.");
     window.print();
     return;
   }
 
-  if (btnText) btnText.textContent = "GENERANDO PDF...";
-  if (downloadBtn) downloadBtn.style.opacity = "0.7";
-
-  const opt = {
-    margin: [8, 8, 8, 8],
-    filename: `Invitacion_Boda_Luis_y_Vane_${CONFIG.EVENT_YEAR}.pdf`,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      letterRendering: true,
-      logging: false,
-      backgroundColor: "#DDD6CA"
-    },
-    jsPDF: {
-      unit: "mm",
-      format: "a4",
-      orientation: "portrait"
+  try {
+    // 1. Asegurar que las fuentes de Google Fonts (Great Vibes, Cormorant Garamond, Montserrat) estén cargadas
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
     }
-  };
 
-  // Posicionar temporalmente el canvas visible para la captura
-  postcardElement.style.position = "static";
-  postcardElement.style.left = "0";
-  postcardElement.style.top = "0";
+    // 2. Posicionar temporalmente la postal para renderizado nítido en html2canvas
+    postcard.style.display = "block";
+    postcard.style.position = "fixed";
+    postcard.style.left = "0";
+    postcard.style.top = "0";
+    postcard.style.zIndex = "-9999";
 
-  html2pdf()
-    .set(opt)
-    .from(postcardElement)
-    .save()
-    .then(() => {
-      showToast("¡Invitación descargada en PDF exitosamente!", "success");
-    })
-    .catch((err) => {
-      console.error("[PDF Error]", err);
-      showToast("Abriendo vista de impresión...", "normal");
-      window.print();
-    })
-    .finally(() => {
-      // Restaurar fuera de pantalla
-      postcardElement.style.position = "absolute";
-      postcardElement.style.left = "-9999px";
-      postcardElement.style.top = "-9999px";
-      if (btnText) btnText.textContent = "DESCARGAR INVITACIÓN EN PDF";
-      if (downloadBtn) downloadBtn.style.opacity = "";
+    // 3. Medir coordenadas del botón de Google Maps antes del render
+    const mapsBtn = document.getElementById("postcard-maps-btn");
+    const cardRect = postcard.getBoundingClientRect();
+    const btnRect = mapsBtn ? mapsBtn.getBoundingClientRect() : null;
+
+    // 4. Capturar con html2canvas a escala 2.5 (~300 DPI nítido para impresión)
+    const canvas = await html2canvas(postcard, {
+      scale: 2.5,
+      useCORS: true,
+      backgroundColor: "#F3EFE6",
+      width: 794,
+      height: 1123,
+      windowWidth: 1200,
+      logging: false
     });
+
+    // 5. Ocultar la postal de nuevo
+    postcard.style.left = "-9999px";
+    postcard.style.display = "none";
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.95);
+
+    // 6. Crear el documento PDF en A4 (210 x 297 mm)
+    const { jsPDF } = window.jspdf || window;
+    if (!jsPDF) {
+      throw new Error("jsPDF no se encuentra cargado.");
+    }
+
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4"
+    });
+
+    // 7. Insertar la postal con fidelidad gráfica total
+    doc.addImage(imgData, "JPEG", 0, 0, 210, 297);
+
+    // 8. Superponer hipervínculo nativo interactivo exacto en el botón de Google Maps
+    if (btnRect && cardRect.width > 0 && cardRect.height > 0) {
+      const scaleX = 210 / cardRect.width;
+      const scaleY = 297 / cardRect.height;
+      const linkX = (btnRect.left - cardRect.left) * scaleX;
+      const linkY = (btnRect.top - cardRect.top) * scaleY;
+      const linkW = btnRect.width * scaleX;
+      const linkH = btnRect.height * scaleY;
+      doc.link(linkX, linkY, linkW, linkH, { url: CONFIG.MAPS_URL });
+    }
+
+    // 9. Guardar archivo en el navegador
+    doc.save("Invitacion_Boda_Vane_y_Luis_2026.pdf");
+    showToast("¡Postal oficial de bodas descargada en PDF (1 página)! ", "success");
+
+  } catch (error) {
+    console.error("[PDF Error]", error);
+    showToast("Abriendo vista de impresión...", "normal");
+    window.print();
+  } finally {
+    if (postcard) {
+      postcard.style.left = "-9999px";
+      postcard.style.display = "none";
+    }
+    if (btnText) btnText.textContent = "DESCARGAR INVITACIÓN OFICIAL EN PDF";
+    if (downloadBtn) downloadBtn.style.opacity = "";
+    if (heroDownloadBtn) heroDownloadBtn.style.opacity = "";
+  }
 }
 
 
@@ -821,18 +797,28 @@ function handleDownloadPdf() {
    12. VINCULACIÓN DE EVENTOS DEL DOM
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  initializeFromConfig();
-  setupColaboracionEvents();
+  initializePage();
 
-  // Reabrir / Resetear formulario desde vista de éxito
+  // Agregar Familiar Invitado (Paso 3)
+  const addFamiliarBtn = document.getElementById("add-familiar-btn");
+  if (addFamiliarBtn) {
+    addFamiliarBtn.addEventListener("click", () => addFamiliarField());
+  }
+
+  // Envío del Formulario RSVP
+  const rsvpForm = document.getElementById("rsvp-form");
+  if (rsvpForm) {
+    rsvpForm.addEventListener("submit", handleRsvpSubmit);
+  }
+
+  // Botón para resetear / reabrir formulario desde vista de éxito
   const resetFormBtn = document.getElementById("reset-form-btn");
   const reopenRsvpBtn = document.getElementById("reopen-rsvp-btn");
-  const formEl = document.getElementById("rsvp-form");
   const successCard = document.getElementById("form-success-view");
 
   function showFormAgain() {
-    if (formEl && successCard) {
-      formEl.style.display = "block";
+    if (rsvpForm && successCard) {
+      rsvpForm.style.display = "block";
       successCard.style.display = "none";
     }
   }
@@ -840,34 +826,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (resetFormBtn) resetFormBtn.addEventListener("click", showFormAgain);
   if (reopenRsvpBtn) reopenRsvpBtn.addEventListener("click", showFormAgain);
 
-  // Alergia específica condicional
-  const restriccionSelect = document.getElementById("restriccion-principal");
-  const otraAlergiaInput = document.getElementById("otra-alergia-principal");
-  if (restriccionSelect && otraAlergiaInput) {
-    restriccionSelect.addEventListener("change", (e) => {
-      if (e.target.value === "Alergia") {
-        otraAlergiaInput.style.display = "block";
-        otraAlergiaInput.focus();
-      } else {
-        otraAlergiaInput.style.display = "none";
-      }
-    });
-  }
-
-  // Agregar Acompañante
-  const addCompanionBtn = document.getElementById("add-companion-btn");
-  if (addCompanionBtn) {
-    addCompanionBtn.addEventListener("click", () => addCompanionField());
-  }
-
-  // Envío RSVP
-  if (formEl) {
-    formEl.addEventListener("submit", handleRsvpSubmit);
-  }
-
-  // Descargar PDF
+  // Descargar PDF desde los botones
   const downloadPdfBtn = document.getElementById("download-pdf-btn");
   if (downloadPdfBtn) {
-    downloadPdfBtn.addEventListener("click", handleDownloadPdf);
+    downloadPdfBtn.addEventListener("click", generateVectorialPdf);
+  }
+
+  const heroDownloadPdfBtn = document.getElementById("hero-download-pdf-btn");
+  if (heroDownloadPdfBtn) {
+    heroDownloadPdfBtn.addEventListener("click", generateVectorialPdf);
   }
 });
